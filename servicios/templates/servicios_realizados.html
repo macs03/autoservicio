@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+
+{% block content %}
+
+     <div class="title">
+      <h1>Servicios Realizados <i class="fa fa-wrench"></i></h1>
+    </div>
+    <div class="row mt-40">
+      <div class="content-form col-lg-5 ">
+          <div class="title-form bg-serv">
+            <span>Agregar Servicio Realizado</span>
+          <i class="fa fa-wrench pull-right"></i>
+          </div>
+        
+      <form action="" method="post" enctype="multipart/form-data" class="form border-serv">
+          {% csrf_token %}
+          {{ servicio_realizado_form|as_bootstrap  }}
+         
+          <input type="submit" value="{{value_boton}}" class="btn btn-primary">
+      </form>
+    
+      </div>  
+      <div class="table-content border-serv col-lg-7">
+          
+          <table class="table table-hover">
+            <thead>
+               <th>Servicio</th>
+               <th>Acciones</th>
+            </thead>
+            <tbody>
+               {% for servicio in servicios_realizados %}
+              <tr>
+                <td>{{servicio.servicio}}</td>
+                <td> 
+                    <span><a href= "{% url "editServicioRealizado" servicio.pk %}"><i class="fa fa-pencil-square-o"></i></a></span>  
+                    <span><a  style="color: red" href= "{% url "deleteServicioRealizado" servicio.pk %}"><i class="fa fa-trash-o"></i></a></span>   
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      </div>
+
+    </div>
+{% endblock %}

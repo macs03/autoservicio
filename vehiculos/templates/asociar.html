@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+
+{% block content %}
+    
+     <div class="title">
+      <h1>Asociar Vehiculos <i class="fa fa-car "></i></h1>
+    </div>
+    <div class="row mt-40">
+      <div class="content-form col-lg-5 ">
+          <div class="title-form bg-veh">
+            <span>Asociar Vehiculos</span>
+           <i class="fa fa-car pull-right"></i>
+          </div>
+        
+      <form action="" method="post" enctype="multipart/form-data" class="form border-veh">
+          {% csrf_token %}
+         {{ asociar_form|as_bootstrap  }}
+         
+          <input type="submit" value="{{value_boton}}" class="btn btn-primary">
+      </form>
+    
+      </div>  
+      <div class="table-content border-veh col-lg-7">
+          
+          <table class="table table-hover">
+            <thead>
+               <th>Cliente</th>
+               <th>Vehiculo</th>
+               <th>Acciones</th>
+            </thead>
+            <tbody>
+               {% for vc in vehiculos_clientes %}
+              <tr>
+                <td>{{ vc.cliente }} </td>
+                <td>{{vc.vehiculo}}</td>
+                <td> 
+                    <span><a href= "{% url "editAsociar" vc.pk %}"><i class="fa fa-pencil-square-o"></i></a></span>  
+                    <span><a  style="color: red" href= "{% url "deleteAsociar" vc.pk %}"><i class="fa fa-trash-o"></i></a></span>  
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      </div>
+
+    </div>
+{% endblock %}

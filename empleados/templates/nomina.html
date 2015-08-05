@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+
+{% block content %}
+
+
+    <div class="title">
+      <h1>Nomina <i class="fa fa-money"></i></h1>
+    </div>
+    <div class="row mt-40">
+      <div class="content-form col-lg-5 ">
+          <div class="title-form bg-emp">
+            <span>Resumen de Nomina</span>
+            <i class="fa fa-cogs pull-right"></i>
+            <i class="fa fa-money pull-right"></i>
+          </div>
+
+          <form action="" method="get" enctype="multipart/form-data" class="form border-emp">
+          {% csrf_token %}
+
+          {{ nomina_form|as_bootstrap  }}
+
+          <input type="submit" value="{{ value_boton }}" class="btn btn-primary">
+      </form>
+
+      </div>
+
+    </div>
+{% endblock %}

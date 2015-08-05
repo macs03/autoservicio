@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title> Resumen de Nomina</title>
+    <style>
+	    .autolavado
+			{
+				margin: auto;
+				text-align: center;
+			}
+			.rif
+			{
+				margin: auto;
+				text-align: center;
+			}
+			.direccion
+			{
+				margin: auto;
+				text-align: center;
+			}
+			.content{
+		      font-family: 'Roboto Condensed', sans-serif;
+		      width: 1024px;
+		      margin: 0 auto;
+	  		}
+  	</style>
+</head>
+<body>
+    <div class="content">
+    	<span><strong>Fecha: </strong>{{fecha_hoy}}</span>
+	    <div class="autolavado">
+	    	<h1>
+	    		AUTO SERVICIO DE LUJO
+	    	</h1>
+	    </div>
+	    <div class="rif">
+	    	<h2>
+	    		RIF: J-40601576-8
+	    	</h2>
+	    </div>
+	    <div class="direccion">
+	    	<p>
+	    		Carrera 4 con calles 4 y 5 Local Nro C 4-6 Sector Bella Vista Capacho Nuevo Táchira Venezuela.
+	    	</p>
+	    </div>
+	    <div class="total_nomina">
+	    	<span><strong>TOTAL NOMINA: </strong> {{acum_nomina}}</span>
+	    </div>
+	    <br>
+	     <table style="  width: 100%;  text-align: center;">
+	     	<span><strong>ASIGNACIONES <span>Del {{fecha_inicio}} al {{fecha_fin}}</span></strong></span>
+	     	<thead>
+	     		<tr>
+	     			<th>Nombre</th>
+	     			<th>Nº</th>
+	     			<th>Sueldo</th>
+	     			<th>D.Laborados</th>
+	     			<th>Bono1</th>
+	     			<th>Bono2</th>
+	     			<th>D.Descanso</th>
+	     			<th>D.Feriado</th>
+	     			<th>TOTAL ASIG.</th>
+	     			<th>TOTAL</th>
+	     		</tr>
+	     	</thead>
+	     	{% for dato in nomina %}
+	    	<tbody>
+	    		<tr>
+	    			<td>
+	    				{{dato.empleado.nombre}} {{dato.empleado.apellido}}
+	    			</td>
+	    			<td>
+	    				{{dato.empleado.pk}}
+	    			</td>
+	    			<td>
+	    				{{dato.empleado.sueldo_base}}
+	    			</td>
+	    			<td>
+	    				{{dato.dias_laborados}}
+	    			</td>
+	    			<td>
+	    				{{dato.bono1_pagar}}
+	    			</td>
+	    			<td>
+	    				{{dato.bono2}}
+	    			</td>
+	    			<td>
+	    				{{dato.dias_descanso}}
+	    			</td>
+	    			<td>
+	    				{{dato.dias_feriados}}
+	    			</td>
+	    			<td>
+	    				{{dato.total_asignaciones}}
+	    			</td>
+	    			<td>
+	    				{{dato.total_pagar}}
+	    			</td>
+	    		</tr>
+	    	</tbody>
+
+	    	{%  endfor %}
+	    </table>
+	    
+	    <br>
+	    <table style="  width: 100%;  text-align: center;">
+	     	<span><strong>DEDUCCIONES</strong></span>
+	     	<thead>
+	     		<tr>
+	     			<th>Nombre</th>
+	     			<th>Nº</th>
+	     			<th>S.S.O </th>
+	     			<th>S.P.F</th>
+	     			<th>L.P.H</th>
+	     			<th>D.no Laborados</th>
+	     			<th>Prestamos</th>
+	     			<th>TOTAL DEDUC</th>
+	     			<th>TOTAL</th>
+	     		</tr>
+	     	</thead>
+	     	{% for dato in nomina %}
+	    	<tbody>
+	    		<tr>
+	    			<td>
+	    				{{dato.empleado.nombre}} {{dato.empleado.apellido}}
+	    			</td>
+	    			<td>
+	    				{{dato.empleado.pk}}
+	    			</td>
+	    			<td>
+	    				{{dato.SSO}}
+	    			</td>
+	    			<td>
+	    				{{dato.SPF}}
+	    			</td>
+	    			<td>
+	    				{{dato.LPH}}
+	    			</td>
+	    			<td>
+	    				{{dato.dias_no_laborados}}
+	    			</td>
+	    			<td>
+	    				{{dato.prestamos}}
+	    			</td>
+	    			<td>
+	    				{{dato.total_deducciones}}
+	    			</td>
+	    			<td>
+	    				{{dato.total_pagar}}
+	    			</td>
+	    		</tr>
+	    	</tbody>
+	    	{%  endfor %}
+	    </table>
+	    
+	    <br>
+	    <br>
+	    <br>
+	    <br>
+
+	    {% if cestaticket != Null %}
+			<table style="  width: 100%;  text-align: center;">
+	     	<span><strong>CESTATICKETS CORRESPONDIENTES:</strong></span> <br>
+	     	<span><strong> FECHA: {{fecha_inicio_c}} Al  {{fecha_fin_C}}</strong></span>
+	     	<thead>
+	     		<tr>
+	     			<th>Nombre</th>
+	     			<th>Nº</th>
+	     			<th>D. Laborados</th>
+	     			<th>D.no Laborados</th>
+	     			<th>TOTAL</th>
+	     		</tr>
+	     	</thead>
+	     	{% for dato in cestaticket %}
+	    	<tbody>
+	    		<tr>
+	    			<td>
+	    				{{dato.empleado.nombre}} {{dato.empleado.apellido}}
+	    			</td>
+	    			<td>
+	    				{{dato.empleado.pk}}
+	    			</td>
+	    			<td>
+	    				{{dato.dias_laborados}}
+	    			</td>
+	    			<td>
+	    				{{dato.dias_nolaborados}}
+	    			</td>
+	    			<td>
+	    				{{dato.total_pagar}}
+	    			</td>
+	    		</tr>
+	    	</tbody>
+	    	{%  endfor %}
+	    </table>
+	    
+	    <br>
+
+	    <span><strong>TOTAL PAGO CESTATICKETS: </strong>{{acum_cestaticket}} </span>
+	    {% endif %}
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Factura Numero: {{factura.pk}}</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+</head>
+<style>
+  .content{
+      font-family: 'Roboto Condensed', sans-serif;
+      width: 1024px;
+      margin: 0 auto;
+  }
+  .info-cliente h4{
+      width: 200px;
+  }
+  .bold{
+      font-weight: bold;
+  }
+  .productos{
+      margin-top: 20px;
+        display: flex;
+  }
+  .center{
+      text-align: center;
+  }
+  .autolavado
+    {
+      margin: auto;
+      text-align: center;
+    }
+    .rif
+    {
+      margin: auto;
+      text-align: center;
+    }
+    .direccion
+    {
+      margin: auto;
+      text-align: center;
+    }
+    .content{
+        font-family: 'Roboto Condensed', sans-serif;
+        width: 1024px;
+        margin: 0 auto;
+      }
+   
+</style>
+<body>
+  
+  <div class="content">
+      <div class="first-header">
+          <h4>Factura Numero: {{factura.pk}}</h4>
+          <h4>Fecha: {{fecha_hoy}} </h4>
+      </div>
+      <div class="autolavado">
+        <h1>
+          AUTO SERVICIO DE LUJO
+        </h1>
+      </div>
+      <div class="rif">
+        <h2>
+          RIF: J-40601576-8
+        </h2>
+      </div>
+      <div class="direccion">
+        <p>
+          Carrera 4 con calles 4 y 5 Local Nro C 4-6 Sector Bella Vista Capacho Nuevo Táchira Venezuela.
+        </p>
+      </div>
+
+       <div class="info-cliente">
+             <div class="nombre">
+                 <span class="bold" style="font-weight: bold;">Nombre:</span>
+                 <span>{{factura.cliente_vehiculo.cliente.nombre}}</span>
+             </div>
+             <div class="apellido">
+                 <span class="bold" style="font-weight: bold;">Apellido:</span>
+                 <span>{{factura.cliente_vehiculo.cliente.apellido}}</span>
+             </div>
+             <div class="direccion">
+                 <span class="bold" style="font-weight: bold;">Dirección:</span>
+                 <span>{{factura.cliente_vehiculo.cliente.direccion}}</span>
+             </div>
+             
+      </div>
+       <table style="  width: 100%;  text-align: center;">
+
+    <caption>Servicios</caption>
+        <thead>
+           <tr>
+             <th >Servicios</th>
+             <th >Precio</th>
+           </tr>
+        </thead>
+
+        
+        {% for servicio in servicios %}
+        <tbody>
+
+           <tr>
+             <td>{{ servicio.servicio }}</td>
+             <td>{{ servicio.costo }}</td>
+           </tr>
+           
+        </tbody> 
+        {% endfor %}
+
+ </table>
+     
+       <table style="  width: 100%;  text-align: center;">
+
+    <caption>Productos</caption>
+        <thead>
+           <tr>
+             <th >Productos</th>
+             <th >Precio</th>
+           </tr>
+        </thead>
+
+        
+        {% for producto in productos %}
+        <tbody>
+           <tr>
+             <td>{{ producto.nombre }}</td>
+             <td>{{ producto.precio }}</td>
+           </tr>
+           
+        </tbody> 
+        {% endfor %}
+ </table>
+      <div class="total" style="text-align: right">
+          <h4>Total: <span>{{factura.total}}Bsf</span></h4>
+      </div>
+      {% if banco != None %}
+      <div style="text-align:right">
+        <span><strong>Banco:</strong> {{banco}}</span>
+      </div>
+      {% endif %}
+  </div>
+   
+    
+</body>
+</html>

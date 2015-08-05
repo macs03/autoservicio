@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+
+{% block content %}
+<style>
+  .cantidad-div{
+    display: none;
+  }
+</style>
+    
+<div class="title">
+      <h1>Factura <i class="fa fa-list-alt"></i></h1>
+    </div>
+    <div class="row mt-40">
+      <div class="content-form col-lg-7 ">
+          <div class="title-form bg-fact">
+            <span>Generar Factura</span>
+           <i class="fa fa-list-alt pull-right"></i>
+          </div>
+        
+        <form  method="post" enctype="multipart/form-data" class="form border-fact">
+        {% csrf_token %}
+            <label for="clientes" class="control-label required-field "> Cliente </label>
+            <div>    
+                <select id="selectCliente" class="form-control" name="cliente">
+                <option value="none">---</option>
+                {% for cliente in clientes_vehiculos %}
+                <option  value="{{ cliente.pk }}">{{ cliente }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <label for="servicios" class="control-label required-field "> Servicios </label>
+            <div> 
+                <select id="serviciosRealizado" multiple class="form-control" name="servicios">
+                
+                </select>
+            </div>
+            <label for="productos" class="control-label required-field "> Productos </label>
+            <div> 
+             <select id="listProducts" name="productos"  class="form-control" id="productos" multiple="multiple">
+              {% for producto in productos %}
+              
+                <option class="option" value="{{producto.pk}}" data-cantidad="cantidad-{{producto.pk}}">{{producto}}</option>
+              
+              {% endfor %}
+              </select>
+
+               <!--<select id="listProducts"  multiple="multiple" class="multiple-select" name="productos">
+                 onclick="cantidad({{producto.pk}})"
+                {% for producto in productos %}
+                <option onclick="cantidad({{producto.pk}});"  value="{{producto.pk}}">{{ producto }}</option>
+                {% endfor %}
+                </select>-->
+                <br>
+                <br>
+                <div class="cantidades">
+                   {% for producto in productos %}
+                  <div class="cantidad-div" id="cantidad-{{producto.pk}}" >
+                    <label for="cantida">Cantidad {{producto.nombre}}:</label>
+                    <input type="number" class="input-producto" data-producto="{{producto}}" name ="cantidad-{{producto.pk}}">  
+                  </div>
+                  <br>
+                  {% endfor %}
+                  
+                </div>
+                
+            </div>
+            <br>
+
+            <label for="bancos" class="control-label required-field "> Bancos </label>
+            <div> 
+                <select id="selectBank" class="form-control" name="bancos">
+                <option value="none">---</option>
+                {% for banco in bancos %}
+                <option  value="{{ banco.pk }}">{{ banco }}</option>
+                {% endfor %}
+                </select>
+            </div>
+               <label for="fecha" class="control-label required-field "> Fecha </label>
+
+                 <div class='input-group date' >
+                     <input type="text" id="datepicker" class="form-control" name="fecha"></p>
+                 </div>
+
+              <label for="fecha" class="control-label required-field "> Total</label>
+              <div class="input-group ">
+                <input id="totalInput" type="text" class="form-control" name="total">
+              </div>
+              <br>
+                    
+           
+            <input type="submit" value="Generar" class="btn btn-primary">
+        </form>
+    
+      </div>  
+      <div class="table-content border-fact col-lg-5">
+          
+          <table class="table table-hover">
+            <thead>
+               <th>Cliente_Vehiculo</th>
+               <th>Fecha</th>
+               <th>Total</th>
+               <th>Acciones</th>
+            </thead>
+            <tbody>
+             {% for factura in facturas %}
+              <tr>
+                <td>{{factura.cliente_vehiculo}}</td>
+                <td>{{factura.fecha}}</td>
+                <td>{{factura.total}}</td>
+                <td> 
+                     
+                     <span><a  style="color: red" href= "{% url "deleteFactura" factura.pk %}"><i class="fa fa-trash-o"></i></a></span>  
+                     <span><a style="color: green" href="{% url "printFactura" factura.pk %}"<i class="fa fa-print"></i>
+                  </a></span> 
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      </div>
+
+    </div>
+{% endblock %}

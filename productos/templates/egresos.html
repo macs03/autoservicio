@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+
+{% block content %}
+
+
+    <div class="title">
+      <h1>Egresos <i class="fa fa-credit-card "></i></h1>
+    </div>
+    <div class="row mt-40">
+      <div class="content-form col-lg-5 ">
+          <div class="title-form bg-emp">
+            <span>Agregar Egreso</span>
+            <i class="fa fa-credit-card pull-right"></i>
+          </div>
+
+      <form action="" method="post" enctype="multipart/form-data" class="form border-emp">
+          {% csrf_token %}
+
+            {{ egresos_form | as_bootstrap }}
+
+          <input type="submit" value="{{ value_boton }}" class="btn btn-primary">
+      </form>
+
+      </div>
+      <div class="table-content border-emp col-lg-7">
+
+          <table class="table table-hover">
+            <thead>
+               <th>A Nombre</th>
+               <th>Responsable</th>
+               <th>Fecha</th>
+               <th>Monto</th>
+            </thead>
+            <tbody>
+
+            {% for egreso in egresos %}
+
+             <tr>
+                <td>{{ egreso.cobrador }}</td>
+                <td>{{ egreso.responsable }}</td>
+                <td>{{ egreso.fecha }}</td>
+                <td>{{ egreso.monto }}</td>
+                <td>
+                  <span><a  style="color: red" href= "{% url "deleteEgreso" egreso.pk %}"><i class="fa fa-trash-o"></i></a></span>
+                  <span><a style="color: green" href="{% url "printEgreso" egreso.pk %}"<i class="fa fa-print"></i>
+                  </a></span>
+                </td>
+              </tr>
+
+            {% endfor %}
+
+            </tbody>
+          </table>
+      </div>
+
+    </div>
+{% endblock %}

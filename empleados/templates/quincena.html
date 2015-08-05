@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+
+{% block content %}
+
+
+    <div class="title">
+      <h1>Quincenas <i class="fa fa-usd "></i></h1>
+    </div>
+    <div class="row mt-40">
+      <div class="content-form col-lg-5 ">
+          <div class="title-form bg-emp">
+            <span>Agregar Quincena</span>
+            <i class="fa fa-cogs pull-right"></i>
+            <i class="fa fa-usd pull-right"></i>
+          </div>
+        
+      <form action="" method="post" enctype="multipart/form-data" class="form border-emp">
+          {% csrf_token %}
+
+          {{ quincena_form|as_bootstrap  }}
+
+          <input type="submit" value="{{ value_boton }}" class="btn btn-primary">
+      </form>
+    
+      </div>  
+      <div class="table-content border-emp col-lg-7">
+          
+          <table class="table table-hover">
+            <thead>
+               <th>Nombre</th>
+               <th>Fecha Inicio</th>
+               <th>Fecha Fin</th>
+               <th>Total</th>
+               <th>Acciones</th>
+            </thead>
+            <tbody>
+
+            {% for quince in quincena  %}
+
+             <tr>
+                <td>{{ quince.empleado.nombre }}</td>
+                <td>{{ quince.fecha_inicio }}</td>
+                <td>{{ quince.fecha_fin }}</td>
+                <td>{{ quince.total_pagar }}</td>
+                <td>
+                  <span><a  style="color: red" href= "{% url "quincena_delete" quince.pk %}"><i class="fa fa-trash-o"></i></a></span>
+                  <span><a style="color: green" href="{% url "quincena_print" quince.pk %}"<i class="fa fa-print"></i>
+                  </a></span>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+      </div>
+
+    </div>
+{% endblock %}

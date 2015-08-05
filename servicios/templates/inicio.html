@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <div class="inicio-title">
+        <h1>Multiservicio De Lujo - Administración <i class="fa fa-tachometer pull-right"></i> </h1>
+        <h2>{{fecha}}</h2>
+    </div>
+    <div class="row mt-40">
+    	<div class="col-lg-6">
+    		<div class="dashboard border-serv">
+            <div class="dashboard-des bg-serv">
+              <i class="fa fa-wrench "></i> 
+               <span class="pull-right">Serv. Realizados</span> 
+               <div class="cantidad">
+                <span></span>
+                   
+               </div>
+                
+            </div>
+            <div class="dashboard-details">
+                <a href="/administracion/servicios" class="color-serv">Ir a Servicios</a>
+               <a href="/administracion/servicios" class="color-serv"><i class="fa fa-chevron-circle-right pull-right"></i></a>
+            </div>
+            </div>
+    	</div>
+    	<div class="col-lg-6">
+            <div class="dashboard border-pro">
+            <div class="dashboard-des bg-pro">
+             <i class="fa fa-barcode "></i>
+               <span class="pull-right">Prod. Vendidos</span> 
+               <div class="cantidad">
+                <span></span>
+                   
+               </div>
+                
+            </div>
+            <div class="dashboard-details">
+                <a href="/administracion/productos" class="color-pro">Ir a Productos</a>
+               <a href="/administracion/productos" class="color-pro"><i class="fa fa-chevron-circle-right pull-right"></i></a>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-40">
+      <div class="col-lg-6">
+        <div class="dashboard border-emp">
+            <div class="dashboard-des bg-emp">
+            <i class="fa fa-cogs "></i></li>
+               <span class="pull-right">Empleados</span> 
+               
+                
+            </div>
+            <div class="dashboard-details">
+                <a href="/administracion/empleados" class="color-emp">Ir a Empleados</a>
+               <a href="/administracion/empleados" class="color-emp"><i class="fa fa-chevron-circle-right pull-right"></i></a>
+            </div>
+            </div>
+      </div>
+      <div class="col-lg-6">
+            <div class="dashboard border-cli">
+            <div class="dashboard-des bg-cli">
+              <i class="fa fa-users"></i></li>
+               <span class="pull-right">Clientes</span> 
+               
+                
+            </div>
+            <div class="dashboard-details">
+                <a href="/administracion/clientes" class="color-cli">Ir a Clientes</a>
+               <a href="/administracion/clientes" class="color-cli"><i class="fa fa-chevron-circle-right pull-right"></i></a>
+            </div>
+            </div>
+        </div>
+    </div>
+     <div class="row mt-40">
+      <div class="col-lg-6">
+        <div class="dashboard border-veh">
+            <div class="dashboard-des bg-veh">
+              <i class="fa fa-car "></i>
+               <span class="pull-right">Vehiculos</span> 
+              
+                
+            </div>
+            <div class="dashboard-details">
+                <a href="/administracion/vehiculos" class="color-veh">Ir a Vehiculos</a>
+               <a href="/administracion/vehiculos" class="color-veh"><i class="fa fa-chevron-circle-right pull-right"></i></a>
+            </div>
+            </div>
+      </div>
+      <div class="col-lg-6">
+            <div class="dashboard border-fact">
+            <div class="dashboard-des bg-fact">
+             <i class="fa fa-list-alt "></i>
+               <span class="pull-right">Facturar</span> 
+               
+            </div>
+            <div class="dashboard-details">
+                <a href="/administracion/facturas" class="color-fact">Ir a Facturar</a>
+               <a href="/administracion/facturas" class="color-fact"><i class="fa fa-chevron-circle-right pull-right"></i></a>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

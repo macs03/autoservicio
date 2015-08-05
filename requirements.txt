@@ -1,0 +1,7 @@
+Django==1.8
+django-forms-bootstrap==3.0.1
+html5lib==0.99999
+Pillow==2.8.1
+pisa==3.0.33
+reportlab==3.1.44
+six==1.9.0

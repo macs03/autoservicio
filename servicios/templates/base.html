@@ -1,0 +1,113 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/admin.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/jquery-ui.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/select2.css">
+
+        <script src="{{ STATIC_URL }}js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="row m0">
+      
+        <div class="menu col-sm-3 col-md-3 col-lg-3">
+          <ul style="overflow-y: auto; max-height: 650px;">
+           <li><a href="/administracion">Multiservicio De Lujo</a> <i class="fa fa-tachometer pull-right"></i></li>
+            <li><a href="/administracion/empleados/">Empleados</a><i class="fa fa-cogs pull-right"></i></li>
+            <li><a href="/administracion/empleados/nomina">Nomina</a><i class="fa fa-cogs pull-right"></i><i class="fa fa-money pull-right"></i></li>
+            <li><a href="/administracion/empleados/cestaticket">Cestaticket</a><i class="fa fa-cogs pull-right"></i><i class="fa fa-ticket pull-right"></i></li>
+            <li><a href="/administracion/empleados/quincena">Quincena</a><i class="fa fa-cogs pull-right"></i><i class="fa fa-usd pull-right"></i></li>
+            <li><a href="/administracion/clientes/">Clientes</a><i class="fa fa-users pull-right"></i></li>
+            <li><a href="/administracion/vehiculos/">Vehiculos</a><i class="fa fa-car pull-right"></i></li>
+            <li><a href="/administracion/vehiculos/asociar/">Asociar</a><i class="fa fa-car pull-right"></i>  <i class="fa fa-users pull-right"></i></li>
+            <li><a href="/administracion/productos/">Productos</a><i class="fa fa-barcode pull-right"></i></li>
+            <li><a href="/administracion/servicios/">Servicios</a> <i class="fa fa-wrench pull-right"></i></li>
+            <li><a href="/administracion/servicios/realizados">Servicios Realizados</a> <i class="fa fa-wrench pull-right"></i><i class="fa fa-check pull-right"></i></li>
+            <li><a href="/administracion/facturas/">Facturar</a><i class="fa fa-list-alt pull-right"></i></li>
+            <li><a href="/administracion/constantes/">Constantes</a><i class="fa fa-archive pull-right"></i></li>
+            <li><a href="/administracion/egresos/">Egresos</a><i class="fa fa-credit-card pull-right"></i></li>
+            <li><a href="/administracion/bancos/">Bancos</a><i class="fa fa-university pull-right"></i></li>
+           
+            <li><a href="{% url "logout" %}" >Log out</a><i class="fa fa-sign-out pull-right"></i></li>
+          </ul>
+        </div>
+       
+
+        <div class="container col-sm-8 col-md-6 col-lg-9">
+          <!-- Example row of columns -->
+         
+          {% if user.is_authenticated %}
+            {% block content %}{% endblock %}
+          {% else %}
+          
+            
+               <form class="form-horizontal form-login col-sm-6 col-md-12 col-lg-6" method="post" >
+                {% csrf_token  %}
+                <legend>Ingresa</legend>
+                    <input type="hidden" name="loginInput" value="login"/>
+                <div class="form-group">
+                  <label for="inputUsername" class="col-lg-2 control-label">Username</label>
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control" id="inputUsername" name="username"placeholder="Username">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                  <div class="col-lg-8">
+                    <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-lg-12 col-lg-offset-4">
+                          <input type="submit" class="btn btn-success " value="iniciar" />
+                  </div>
+                </div>
+         
+
+
+
+
+            </form>
+        {% endif %}
+                
+        </div> <!-- /container -->       
+    </div>
+      <footer>
+        <p>&copy; Auto Servicio</p>
+      </footer>
+         
+        <script src="{{ STATIC_URL }}js/vendor/jquery-1.11.2.min.js"></script>
+         <script src="{{ STATIC_URL }}js/vendor/bootstrap.min.js"></script>
+         <script src="{{ STATIC_URL }}js/vendor/jquery-ui.min.js"></script>  
+         <script src="{{ STATIC_URL }}js/vendor/select2.js"></script>
+
+         <script src="{{ STATIC_URL }}js/admin.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+    </body>
+</html>

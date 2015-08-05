@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cestaticket Número: {{cestaticket.pk}}</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+</head>
+<style>
+  .content{
+      font-family: 'Roboto Condensed', sans-serif;
+      width: 1024px;
+      margin: 0 auto;
+  }
+  .info-cliente h4{
+      width: 200px;
+  }
+  .bold{
+      font-weight: bold;
+  }
+  .productos{
+      margin-top: 20px;
+        display: flex;
+  }
+  .center{
+      text-align: center;
+  }
+  
+   
+</style>
+<body>
+  
+  <div class="content">
+      <div class="first-header">
+          <h4>AUTO SERVICIO </h4>
+          <h4>Fecha: {{fecha_hoy}}</h4>
+          <h4>RIF: J-40601576-8 </h4>
+      </div>
+      
+      
+       <table style="  width: 100%;  text-align: center;">
+
+    <caption>CESTATICKET CORRESPONDIENTE</caption>
+        <thead >
+           <tr>
+             <th ></th>
+             <th ></th>
+           </tr>
+        </thead>
+
+        
+
+        <tbody>
+           <tr>
+             <td class="bold">Perido De Pago Del </td>
+             <td>{{cestaticket.fecha_inicio}} Al {{cestaticket.fecha_fin}}</td>
+           </tr>
+           <tr>
+             <td class="bold">Apellidos y Nombres</td>
+             <td>{{cestaticket.empleado.apellido}} {{cestaticket.empleado.nombre}}</td>
+           </tr>
+           <tr>
+             <td class="bold">Cedula de Identidad</td>
+             <td>V. {{cestaticket.empleado.cedula}}</td>
+           </tr>
+           <tr>
+             <td class="bold"> <br> <br>CONCEPTO A PAGAR DEL BENEFICIO DE ALIMENTACION <br>0,5 U.T POR DIAS LABORADOS (EQUIVALENTE A BS {{cestaticket.costo.valor}} <br>PUBLICADO EN GACETA OFICIAL 6.147 DEL 17 DE MOVIEMBRE DEL 2014</td>
+             <td></td>
+           </tr>
+           <tr>
+             <td class="bold">Dias Laborados en el mes:</td>
+             <td> {{cestaticket.dias_laborados}}</td>
+           </tr>
+           <tr>
+             <td class="bold">Dias No Laborados en el mes:</td>
+             <td> {{cestaticket.dias_nolaborados}}</td>
+           </tr>
+        </tbody> 
+
+ </table>
+     
+       
+      <div class="total" style="text-align: right">
+          <h4>Total Pagado: <span>{{cestaticket.total_pagar}}</span></h4>
+      </div>
+      <div class="info">
+          <span>POR MEDIO DE LA PRESENTE HAGO CONSTAR QUE RECIBO EN ESTE ACTO DEL BENEFICIO DE ALIMIENTACION
+          EN EFECTIVO, SEGUN ARTICULO 4, PARRAFO DEL DECRETO 8.189, PUBLICADO EN GACETA OFICIAL 39,666 DE FECHA 01/052011 QUE DE ACUERDO AL ARTICULO 5 DEL MISMO DECRETO NO SERA CONSIDERADO SALARIO DE CONFORMIDAD CON LO ESTABLECIDO EN LA LEY ORGANICA DEL TRABAJO</span>
+      </div>
+      
+      <div class="recibido" style="margin-top: 20px;">
+          <div class="bold r-nombre"  style="margin-top: 20px;">
+              Nombre: {{cestaticket.empleado.apellido}} {{cestaticket.empleado.nombre}}
+          </div>
+          <div class="bold r-nombre"  style="margin-top: 10px;">
+              CI: V. {{cestaticket.empleado.cedula}}
+          </div>
+          <div class="bold r-nombre" style="margin-top: 10px;" >
+              Fecha: {{fecha_hoy}}
+          </div>
+           <div class="bold r-nombre" style="margin-top: 10px;" >
+              Firma:
+          </div>
+      </div>
+  </div>
+   
+    
+</body>
+</html>

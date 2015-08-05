@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content=" Mutliservicio de Lujo, servicio de atulavado y atencion en general, resultado de busqueda" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+	<title>Autolavado, Resultado Busqueda de Vehiculo</title>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'/>
+	<link href='http://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/normalize.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.min.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/estilos.css">
+	<link rel="shorcut icon" href="{{ STATIC_URL }}img/camaro.ico">
+</head>
+<body>
+	<header id="header">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<h1 class="pull-left"><a href="{{ "/" }}">AUTOSERVICIO DE LUJO</a></h1>
+				<a id="bar" class="pull-right bar-menu">
+					<i class="fa fa-bars fa-lg"></i>
+				</a>
+				<div class="col-md-5 pull-right">
+
+                        <ul id="menu2" class="menu2 dis-user">
+                            <li class="col-md-2">
+                                 {% for vehiculo in vehiculo_cliente %}
+                                    {{ vehiculo.cliente.nombre}}  {{ vehiculo.cliente.apellido }}
+                                {% endfor %}
+                            </li>
+                            <li class="col-md-2">
+                                {% for vehiculo in vehiculo_cliente %}
+                                    {{ vehiculo.vehiculo.marca}} , {{ vehiculo.vehiculo.modelo }}
+                                {% endfor %}
+                            </li>
+                            <li><a href="/" class="toplink col-md-2 text-center">
+                                Volver
+                            </a></li>
+					    </ul>
+
+				</div>
+			</div>
+		</div>
+		    <ul id="menu">
+			    <li>
+				    {% for vehiculo in vehiculo_cliente %}
+                        {{ vehiculo.cliente.nombre}}  {{ vehiculo.cliente.apellido }}
+                    {% endfor %}
+			    </li>
+			    <li>
+				    {% for vehiculo in vehiculo_cliente %}
+                        {{ vehiculo.vehiculo.marca}} , {{ vehiculo.vehiculo.modelo }}
+                    {% endfor %}
+			    </li>
+			    <li><a href="/">
+				    Volver
+			    </a></li>
+		    </ul>
+	</header>
+	<section>
+		<div class="row">
+			<div class="dato-usuario">
+
+				<div class="carro col-md-6 col-xs-12 col-sm-12">
+                    {% for vehiculo in vehiculo_cliente %}
+                         {{ vehiculo.vehiculo.marca}} , {{ vehiculo.vehiculo.modelo }}
+                    {% endfor %}
+				</div>
+				<div class="usuario col-md-6 col-xs-12 col-sm-12">
+                    {% for vehiculo in vehiculo_cliente %}
+                         {{ vehiculo.cliente.nombre}}  {{ vehiculo.cliente.apellido }}
+                    {% endfor %}
+				</div>
+
+			</div>
+		</div>
+		<div class="row">
+            {% for servicio in servicios_hechos  %}
+
+			<div class="col-md-6 col-sm-6 col-xs-12 dato-colapsar" id="content-service" data-collapse>
+				<div class="cabecera">
+					<ul>
+						<li class="col-md-4 col-sm-4 col-xs-4">
+							<span>{{ servicio.fecha }}5</span>
+						</li>
+						<li class="col-md-6 col-sm-6 col-xs-6 text-center">
+							<span>{{ servicio.servicio.nombre }}</span>
+						</li>
+						<li class="col-md-2 col-sm-2 col-xs-2">
+							<i class="fa fa-chevron-down" id="iconito"></i>
+							<i class="fa fa-chevron-up" id="iconito2"></i>
+						</li>
+					</ul>			
+				</div>
+				<div class="contenido col-md-12 col-sm-12 col-xs-12">
+					<div class="col-md-12 col-sm-12 col-xs-12 top-des-serv">
+                        <span>Servicio</span>
+						<span>Productos</span>
+						<span>Empleado</span>
+						<span>Costo</span>
+                     </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 des-serv">
+						<p class = "col-md-3 col-sm-3 col-xs-3">{{ servicio.servicio.nombre }}</p>
+                        <span>Productos</span>
+                        <span>{{ servicio.empleado }}</span>
+                        <span>{{ servicio.costo }} Bs</span>
+					</div>
+				</div>
+			</div>
+
+            {% endfor %}
+
+
+		</div>
+	</section>
+	<footer class="footer-fijo">
+		&copy 2015 <span>Autolavado</span> 
+		<p><span>-powered by upload-</span></p>
+		<div class="pull-right go-up">
+			<a href="#top" class="toplink" ><i class="fa fa-arrow-circle-up fa-2x"></i></a>
+		</div>
+	</footer>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/vendor/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}/js/vendor/bootstrap.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}/js/irAnclas.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}/js/efectos.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}/js/mapa.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}/js/jquery.collapse.js"></script>
+    <script>
+        new jQueryCollapse($(".dato-colapsar"), {
+          show: function() {
+            this.slideDown(150);
+          },
+          hide: function() {
+            this.slideUp(150);
+          },
+        });
+      </script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Egreso número: {{egresos.pk}}</title>
+    <style>
+	    .autolavado
+			{
+				margin: auto;
+				text-align: center;
+			}
+			.rif
+			{
+				margin: auto;
+				text-align: center;
+			}
+			.direccion
+			{
+				margin: auto;
+				text-align: center;
+			}
+			.content{
+		      font-family: 'Roboto Condensed', sans-serif;
+		      width: 1024px;
+		      margin: 0 auto;
+	  		}
+  	</style>
+</head>
+<body>
+    <div class="content">
+    	<span><strong>Fecha: </strong>{{fecha_hoy}}</span>
+	    <div class="autolavado">
+	    	<h1>
+	    		AUTO SERVICIO DE LUJO
+	    	</h1>
+	    </div>
+	    <div class="rif">
+        <h2>
+          RIF: J-40601576-8
+        </h2>
+      </div>
+      <div class="direccion">
+        <p>
+          Carrera 4 con calles 4 y 5 Local Nro C 4-6 Sector Bella Vista Capacho Nuevo Táchira Venezuela.
+        </p>
+      </div>
+	     <table style="  width: 100%;  text-align: center;">
+	     	<thead>
+	     		<tr>
+	     			<th>Cobrador</th>
+	     			<th>Monto</th>
+	     		</tr>
+	     	</thead>
+	    	<tbody>
+	    		<tr>
+	    			<td>
+	    				{{egresos.cobrador}}
+	    			</td>
+	    			<td>
+	    				{{egresos.monto}}
+	    			</td>
+	    		</tr>
+	    	</tbody>
+	    </table>
+	    
+	    <br>
+
+	    <table style="  width: 100%;  text-align: center;">
+	     	<thead>
+	     		<tr>
+	     			<th>Monto en Letra:</th>
+	     		</tr>
+	     	</thead>
+	    	<tbody>
+	    		<tr>
+	    			<td>
+	    				{{monto_letra}} Bs.
+	    			</td>
+	    		</tr>
+	    	</tbody>
+	    </table>
+	    <br>
+	    <table style="  width: 100%;  text-align: center;">
+	     	<thead>
+	     		<tr>
+	     			<th>Fecha:</th>
+	     			<th>Firma:</th>
+	     		</tr>
+	     	</thead>
+	    	<tbody>
+	    		<tr>
+	    			<td>
+	    				{{egresos.fecha}}
+	    			</td>
+	    			<td>
+	    				Autolavado De lujo
+	    			</td>
+	    		</tr>
+	    	</tbody>
+	    </table>
+	    <br>
+	    <table style="  width: 100%;  text-align: center;">
+	     	<thead>
+	     		<tr>
+	     			<th></th>
+	     			<th>Comprobante de Egreso:</th>
+	     		</tr>
+	     	</thead>
+	    	<tbody>
+	    		<tr>
+	    			<td>
+	    				
+	    			</td>
+	    			<td>
+	    				Nº: {{egresos.pk}}
+	    			</td>
+	    		</tr>
+	    	</tbody>
+	    </table>
+	    <br>
+	    <table style="  width: 100%;  text-align: center;">
+	     	<thead>
+	     		<tr>
+	     			<th>Descripcion:</th>
+	     			<th>Monto Total:</th>
+	     		</tr>
+	     	</thead>
+	    	<tbody>
+	    		<tr>
+	    			<td>
+	    				{{egresos.descripcion}}
+	    			</td>
+	    			<td>
+	    				Bs. {{egresos.monto}}
+	    			</td>
+	    		</tr>
+	    	</tbody>
+	    </table>
+	    <br>
+	    <table style="  width: 100%;  text-align: center;">
+	     	<thead>
+	     		<tr>
+	     			<th>Tipo de Pago:</th>
+	     			<th></th>
+	     		</tr>
+	     	</thead>
+	    	<tbody>
+	    		<tr>
+	    			<td>
+	    				{{egresos.tipo}}
+	    			</td>
+	    			<td>
+	    				
+	    			</td>
+	    		</tr>
+	    	</tbody>
+	    </table>
+	    <br>
+	    <table style="  width: 100%;  text-align: center;">
+	     	<thead>
+	     		<tr>
+	     			<th>Banco:</th>
+	     			<th>Sello:</th>
+	     		</tr>
+	     	</thead>
+	    	<tbody>
+	    		<tr>
+	    			<td>
+	    				{{egresos.banco}}
+	    			</td>
+	    			<td>
+	    				
+	    			</td>
+	    		</tr>
+	    	</tbody>
+	    </table>
+	    <br>
+	    <table style="  width: 100%;  text-align: center;">
+	     	<thead>
+	     		<tr>
+	     			<th>Responsable:</th>
+	     			<th>Firma:</th>
+	     		</tr>
+	     	</thead>
+	    	<tbody>
+	    		<tr>
+	    			<td>
+	    				{{egresos.responsable}}
+	    			</td>
+	    			<td>
+	    				
+	    			</td>
+	    		</tr>
+	    	</tbody>
+	    </table>
+	    <br>
+	</div>
+</body>
+</html>

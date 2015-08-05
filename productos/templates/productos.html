@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+
+{% block content %}
+
+     <div class="title">
+      <h1>Productos <i class="fa fa-barcode "></i></h1>
+    </div>
+    <div class="row mt-40">
+      <div class="content-form col-lg-5 ">
+          <div class="title-form bg-pro">
+            <span>Agregar Productos</span>
+           <i class="fa fa-barcode pull-right"></i>
+          </div>
+        
+      <form action="" method="post" enctype="multipart/form-data" class="form border-pro">
+          {% csrf_token %}
+          {{ producto_form|as_bootstrap  }}
+         
+          <input type="submit" value="{{value_boton}}" class="btn btn-primary">
+      </form>
+    
+      </div>  
+      <div class="table-content border-pro col-lg-7">
+          
+          <table class="table table-hover">
+            <thead>
+               <th>Nombre</th>
+               <th>Codigo</th>
+               <th>Costo</th>
+               <th>Precio</th>
+               <th>Cantidad</th>
+               <th>Acciones</th>
+            </thead>
+            <tbody>
+              {% for producto in productos %}
+               {% if producto.cantidad < 1 %}
+              <tr class="danger">
+                {% else %} 
+              <tr>
+                {% endif %}
+                <td>{{producto.nombre}}</td>
+                <td>{{producto.codigo}}</td>
+                <td>{{producto.costo}}</td>
+                <td>{{producto.precio}}</td>
+                <td>{{producto.cantidad}}</td>
+                <td> 
+                     <span><a href= "{% url "editProducto" producto.pk %}"><i class="fa fa-pencil-square-o"></i></a></span>  
+                     <span><a  style="color: red" href= "{% url "deleteProducto" producto.pk %}"><i class="fa fa-trash-o"></i></a></span>   
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      </div>
+
+    </div>
+{% endblock %}
