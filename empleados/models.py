@@ -10,7 +10,7 @@ class Empleados(models.Model):
     hoja_de_vida = models.FileField(upload_to='media/archivos/')
 
     def __str__(self):
-        return self.nombre
+        return "%s %s - %s" % (self.nombre, self.apellido, self.cargo)
 
 
 class Control_Empleados(models.Model):
@@ -82,7 +82,7 @@ class Bancos(models.Model):
     numero = models.CharField(max_length=20)
     monto_disponible = models.FloatField()
     def __str__(self):
-        return "%s" % (self.nombre)
+        return "%s %s %d" % (self.nombre, self.cuenta, self.monto_disponible)
 
 class TipoEgreso(models.Model):
     nombre = models.CharField(max_length=100)

@@ -9,7 +9,7 @@ class Vehiculos(models.Model):
 	km = models.CharField(max_length=20)
 
 	def __str__(self):
-		return self.placa
+		return "%s - %s" % (self.placa,self.modelo)
 
 class Vehiculo_Clientes(models.Model):
 	cliente = models.ForeignKey(Clientes)

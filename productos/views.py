@@ -187,6 +187,12 @@ def egresos(request):
             new_egreso = egresos_form.save()
             monto_letra = number_to_letter.to_word(int(new_egreso.monto))
             print monto_letra
+            print request.POST['banco']
+            bancos = Bancos.objects.filter(pk=request.POST['banco'])
+            print bancos[0].monto_disponible
+            monto_restante = bancos[0].monto_disponible - float(request.POST['monto'])
+            print monto_restante
+            Bancos.objects.update(monto_disponible = monto_restante)
             html = render_to_string('egresos_pdf.html', {'pagesize': 'A4', 'egresos': new_egreso,'fecha_hoy':fecha_hoy,'monto_letra': monto_letra},
                             context_instance=RequestContext(request))
             return generar_pdf(html)

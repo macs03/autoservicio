@@ -61,7 +61,9 @@ def nomina(request):
     template = "nomina.html"
     value_boton = "Generar"
     fecha_hoy = time.strftime("%d/%m/%y")
+    quincenas = Quincenas.objects.all()
     if request.method == 'GET':
+        print request.GET.get('quincenas_select','')
         nomina_form = NominaForm(request.GET,request.FILES)
         if nomina_form.is_valid():
             consulta = Quincenas.objects.filter(fecha_fin=request.GET['fecha_fin']).order_by('pk')
@@ -182,7 +184,7 @@ def cestaticket(request):
             print fecha_hoy
             new_cestaticket.save()
             #return HttpResponseRedirect('/administracion/empleados/cestaticket')
-            html = render_to_string('cestaticket_pdf.html', {'pagesize':'A4', 'cestatickets':new_cestaticket,'fecha_hoy':fecha_hoy},context_instance=RequestContext(request))
+            html = render_to_string('cestaticket_pdf.html', {'pagesize':'A4', 'cestaticket':new_cestaticket,'fecha_hoy':fecha_hoy},context_instance=RequestContext(request))
             return generar_pdf(html)
     else:
         cestaticket_form = CestaticketForm()
@@ -225,7 +227,9 @@ def quincena(request):
                     bono1 = servicio_hechos * new_quincena.bono1.valor
                     print bono1
                     new_quincena.bono1_pagar = bono1
-                    sueldos = Empleados.objects.filter(nombre=new_quincena.empleado)
+                    sueldos = Empleados.objects.filter(nombre=new_quincena.empleado.nombre)
+                    print "sueldo base"
+                    print sueldos
                     sueldo = sueldos[0].sueldo_base
                     print sueldo
                     print "------"
@@ -266,7 +270,9 @@ def quincena(request):
                     bono1 = servicio_hechos * new_quincena.bono1.valor
                     print bono1
                     new_quincena.bono1_pagar = bono1
-                    sueldos = Empleados.objects.filter(nombre=new_quincena.empleado)
+                    sueldos = Empleados.objects.filter(nombre=new_quincena.empleado.nombre)
+                    print "sueldo base"
+                    print sueldos
                     sueldo = sueldos[0].sueldo_base
                     print sueldo
                     print "------"
@@ -301,7 +307,7 @@ def quincena(request):
                     new_quincena.save()
 
 
-            html = render_to_string('quincena_pdf.html', {'pagesize':'A4', 'quincena':new_quincena},context_instance=RequestContext(request))
+            html = render_to_string('quincena_pdf.html', {'pagesize':'A4', 'quincena':new_quincena,'fecha_hoy':fecha_hoy},context_instance=RequestContext(request))
             return generar_pdf(html)
 
             #return HttpResponseRedirect('/administracion/empleados/quincena')
