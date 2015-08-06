@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title> Resumen de Nomina</title>
+    <style>
+	    .autolavado
+			{
+				margin: auto;
+				text-align: center;
+			}
+			.rif
+			{
+				margin: auto;
+				text-align: center;
+			}
+			.direccion
+			{
+				margin: auto;
+				text-align: center;
+			}
+			.content{
+		      font-family: 'Roboto Condensed', sans-serif;
+		      width: 1024px;
+		      margin: 0 auto;
+	  		}
+  	</style>
+</head>
+<body>
+    <div class="content">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+    	<span><strong>Fecha: </strong>{{fecha_hoy}}</span>
+	   <!-- <div class="autolavado">
+	    	<h1>
+	    		AUTO SERVICIO DE LUJO
+	    	</h1>
+	    </div>
+	    <div class="rif">
+	    	<h2>
+	    		RIF: J-40601576-8
+	    	</h2>
+	    </div>
+	    <div class="direccion">
+	    	<p>
+	    		Carrera 4 con calles 4 y 5 Local Nro C 4-6 Sector Bella Vista Capacho Nuevo Táchira Venezuela.
+	    	</p>
+	    </div> -->
+
+	    <div class="total_nomina">
+            {% for empleado in empleado %}
+	    	<span><strong>Servicios Realizados por : </strong>{{empleado.nombre}} {{empleado.apellido}} {{empleado.cedula}} {{empleado.cargo}}  </span>
+            {% endfor %}
+	    </div>
+	    <br>
+        <table style="  width: 100%;  text-align: center;">
+            <span><strong>SERVICIOS <span>Del {{fecha_inicio}} al {{fecha_fin}}</span></strong></span>
+            <br/>
+            <br/>
+            <thead>
+            <tr>
+                <th>Servicio</th>
+	     			<th>Vehiculo</th>
+	     			<th>Fecha</th>
+                    <th>Valor</th>
+            </tr>
+            </thead>
+            {% for servicio in servicios %}
+	    	<tbody>
+                <tr>
+                    <td>
+                        {{servicio.servicio}}
+                    </td>
+                    <td>
+                        {{servicio.vehiculo_cliente}}
+                    </td>
+                    <td>
+                        {{servicio.fecha}}
+                    </td>
+                    <td>
+                        {{servicio.costo}}
+                    </td>
+                </tr>
+	    	</tbody>
+                {% endfor %}
+        </table>
+	    
+	    <br>
+	    
+	    <br>
+	    <br>
+	    <br>
+	    <br>
+
+	    <br>
+
+	</div>
+</body>
+</html>

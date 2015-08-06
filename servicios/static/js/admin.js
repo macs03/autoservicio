@@ -72,7 +72,7 @@ $(function(){
 		  servicios = str.split('_')
 		  for (var i = servicios.length - 1; i >= 0; i--) {
 		  	if(servicios[i].split('-')[6]){
-		  		precioStr = servicios[i].split('-')[6];
+		  		precioStr = servicios[i].split('-')[7];
 		  		precio = precio + parseInt(precioStr);
 		  		
 		  	}

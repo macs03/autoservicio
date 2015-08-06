@@ -3,12 +3,12 @@ from servicios.models import Servicios_Realizados
 from .models import Empleados, Cestatickets ,Constantes_Administracion,Quincenas,Control_Empleados,Bancos
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
-from .models import EmpleadosForm, CestaticketForm, ConstantesForm,QuincenasForm,BancosForm,NominaForm
+from .models import EmpleadosForm, CestaticketForm, ConstantesForm,QuincenasForm,BancosForm,NominaForm,ServEmpForm
 from django.http.response import HttpResponse, HttpResponseRedirect
 from productos.views import generar_pdf
 from django.template.loader import render_to_string
 from django.template import RequestContext
-import time
+import time, calendar
 # Create your views here.
 
 @login_required(login_url='/administracion')
@@ -59,69 +59,82 @@ def empleados_delete(request, pk_id):
 def nomina(request):
     print "vista nomina"
     template = "nomina.html"
+    errors = []
     value_boton = "Generar"
     fecha_hoy = time.strftime("%d/%m/%y")
     quincenas = Quincenas.objects.all()
     if request.method == 'GET':
-        print request.GET.get('quincenas_select','')
         nomina_form = NominaForm(request.GET,request.FILES)
-        if nomina_form.is_valid():
-            consulta = Quincenas.objects.filter(fecha_fin=request.GET['fecha_fin']).order_by('pk')
-            print consulta
-            print request.GET['fecha_inicio']
-            fecha_inicio = request.GET['fecha_inicio']
-            fecha_fin = request.GET['fecha_fin']
-            fecha_final = str(request.GET['fecha_fin'])
-            corte = fecha_final.split('-')
-            print "ultimo dia ----"
-            dia_final = corte[2]
-            print dia_final
-            print type(fecha_final)
-            print request.GET['fecha_fin']
-            consulta2 = None
-            fecha_inicio_c = None
-            fecha_fin_C = None
-            acum_nomina = 0
-            acum_cestaticket = 0
-            for dato in consulta:
-                print dato.empleado.nombre
-                print dato.empleado.apellido
-                print dato.numero_quincena
-                print dato.dias_laborados
-                print dato.bono1_pagar
-                print dato.bono2
-                print dato.dias_descanso
-                print dato.dias_feriados
-                print dato.asignaciones_dia_laborado
-                asignaciones = dato.asignaciones_dia_laborado + dato.asignaciones_dia_feriado
-                print asignaciones
-                print dato.SSO
-                print dato.SPF
-                print dato.LPH
-                print dato.dias_no_laborados
-                print dato.prestamos
-                deducciones = dato.SSO - dato.SPF - dato.LPH
-                print deducciones
-                print dato.total_pagar
-                acum_nomina = acum_nomina + dato.total_pagar
+        if(nomina_form.is_valid()):
+            print request.GET
+            print "-------------------quincena"
+            numero_quincena = request.GET['numero_quincena']
+            if not numero_quincena:
+                print "no hay quincena"
+                errors.append('Por favor introduce un numero de quincena')
+            else:
+                print "si hay quincena"
+                #quincena_valida = get_object_or_404(Quincenas, numero_quincena=numero_quincena)
+                print numero_quincena
+                print type(numero_quincena)
+                numero = int(numero_quincena)
+                quincena_valida = Quincenas.objects.filter(numero_quincena = numero).order_by('pk')
+                print quincena_valida
+                fecha_inicio = quincena_valida[0].fecha_inicio
+                print fecha_inicio
+                fecha_fin = quincena_valida[0].fecha_fin
+                print fecha_fin
+                fecha_final = str(fecha_fin)
+                corte = fecha_final.split('-')
+                print "ultimo dia ----"
+                dia_final = corte[2]
+                print dia_final
+                print type(fecha_final)
+                consulta2 = None
+                fecha_inicio_c = None
+                fecha_fin_C = None
+                acum_nomina = 0
+                acum_cestaticket = 0
+                for dato in quincena_valida:
+                    print dato.empleado.nombre
+                    print dato.empleado.apellido
+                    print dato.numero_quincena
+                    print dato.dias_laborados
+                    print dato.bono1_pagar
+                    print dato.bono2
+                    print dato.dias_descanso
+                    print dato.dias_feriados
+                    print dato.asignaciones_dia_laborado
+                    asignaciones = dato.asignaciones_dia_laborado + dato.asignaciones_dia_feriado
+                    print asignaciones
+                    print dato.SSO
+                    print dato.SPF
+                    print dato.LPH
+                    print dato.dias_no_laborados
+                    print dato.prestamos
+                    deducciones = dato.SSO - dato.SPF - dato.LPH
+                    print deducciones
+                    print dato.total_pagar
+                    acum_nomina = acum_nomina + dato.total_pagar
 
-            if dia_final == '31' or dia_final == '30' or dia_final == '29' or dia_final == '28' :
-                print "hay cestaticket"
-                consulta2 = Cestatickets.objects.filter(fecha_fin=request.GET['fecha_fin']).order_by('pk')
-                fecha_inicio_c = consulta2[0].fecha_inicio
-                fecha_fin_C = consulta2[0].fecha_fin
-                for ticket in consulta2:
-                    print ticket.empleado.nombre
-                    print ticket.empleado.apellido
-                    print ticket.empleado.cedula
-                    print ticket.fecha_inicio
-                    print ticket.fecha_fin
-                    print ticket.total_pagar
-                    acum_cestaticket = acum_cestaticket + ticket.total_pagar
+                if dia_final == '31' or dia_final == '30' or dia_final == '29' or dia_final == '28' :
+                    print "hay cestaticket"
+                    consulta2 = Cestatickets.objects.filter(fecha_fin=fecha_fin).order_by('pk')
+                    fecha_inicio_c = consulta2[0].fecha_inicio
+                    fecha_fin_C = consulta2[0].fecha_fin
+                    for ticket in consulta2:
+                        print ticket.empleado.nombre
+                        print ticket.empleado.apellido
+                        print ticket.empleado.cedula
+                        print ticket.fecha_inicio
+                        print ticket.fecha_fin
+                        print ticket.total_pagar
+                        acum_cestaticket = acum_cestaticket + ticket.total_pagar
 
 
-            html = render_to_string('nomina_pdf.html', {'pagesize':'A4', 'nomina':consulta, 'cestaticket':consulta2,'fecha_hoy':fecha_hoy ,'fecha_inicio':fecha_inicio,'fecha_fin':fecha_fin ,'fecha_inicio_c' : fecha_inicio_c ,'fecha_fin_C': fecha_fin_C, 'acum_nomina':acum_nomina,'acum_cestaticket':acum_cestaticket},context_instance=RequestContext(request))
-            return generar_pdf(html)
+                html = render_to_string('nomina_pdf.html', {'pagesize':'A4', 'nomina':quincena_valida, 'cestaticket':consulta2,'fecha_hoy':fecha_hoy ,'fecha_inicio':fecha_inicio,'fecha_fin':fecha_fin ,'fecha_inicio_c' : fecha_inicio_c ,'fecha_fin_C': fecha_fin_C, 'acum_nomina':acum_nomina,'acum_cestaticket':acum_cestaticket},context_instance=RequestContext(request))
+                return generar_pdf(html)
+
     return render(request, template, locals())
 
 @login_required(login_url='/administracion')
@@ -368,6 +381,96 @@ def bancos_edit(request, pk_id):
         return HttpResponseRedirect('/administracion/bancos')
     else:
         constantes_form = ConstantesForm(instance=bancos_instance)
+
+
+    return render(request, template, locals())
+
+@login_required(login_url='/administracion')
+def serv_empl(request):
+    template = "serv_empl.html"
+    ser_empl_form = ServEmpForm(request.GET,request.FILES)
+    empleados = Empleados.objects.all()
+    fecha_hoy = time.strftime("%d/%m/%y")
+    value_boton = "Consultar"
+    if request.method == 'GET':
+        if (ser_empl_form.is_valid()):
+            print request.GET
+            print "..........................empleado"
+            empleado = request.GET['cedula']
+            print empleado
+            fecha_inicio = request.GET.get('fecha_inicio','')
+            print "........fecha1"
+            print fecha_inicio
+            print type(fecha_inicio)
+            fecha_inicio_S = str(fecha_inicio)
+            print type(fecha_inicio_S)
+            fecha_S_split = fecha_inicio_S.split('-')
+            dia_inicio = fecha_S_split[0]
+            print  dia_inicio
+            dia_inicio_I = int(dia_inicio)
+            mes_inicio = fecha_S_split[1]
+            print  mes_inicio
+            mes_inicio_I = int(mes_inicio)
+            ano_inicio = fecha_S_split[2]
+            print  ano_inicio
+            ano_inicio_I = int(ano_inicio)
+
+
+            fecha_fin = request.GET.get('fecha_fin','')
+            print "........fecha2"
+            print fecha_fin
+            print type(fecha_fin)
+            fecha_fin_S = str(fecha_fin)
+            print type(fecha_fin_S)
+            fecha_S_split2 = fecha_fin_S.split('-')
+            dia_inicio2 = fecha_S_split2[0]
+            print  dia_inicio2
+            dia_inicio_I2 = int(dia_inicio2)
+            mes_inicio2 = fecha_S_split2[1]
+            print  mes_inicio2
+            mes_inicio_I2 = int(mes_inicio2)
+            ano_inicio2 = fecha_S_split2[2]
+            print  ano_inicio2
+            ano_inicio_I2 = int(ano_inicio2)
+
+            empleado_ingresado = Empleados.objects.filter(cedula = empleado)
+            print empleado_ingresado
+
+            servicios = Servicios_Realizados.objects.filter(empleado = empleado_ingresado)
+            print servicios
+            for servicio in servicios:
+                fecha = servicio.fecha
+                print fecha
+                print type(fecha)
+                fecha_S = str(fecha)
+                print type(fecha_S)
+
+                fecha_S_split3 = fecha_S.split('-')
+                dia_inicio3 = fecha_S_split3[0]
+                print  dia_inicio3
+                dia_inicio_I3 = int(dia_inicio3)
+                mes_inicio3 = fecha_S_split3[1]
+                print  mes_inicio3
+                mes_inicio_I3 = int(mes_inicio3)
+                ano_inicio3 = fecha_S_split3[2]
+                print  ano_inicio3
+                ano_inicio_I3 = int(ano_inicio3)
+
+                if ano_inicio3 >= ano_inicio and ano_inicio3 <=ano_inicio2:
+                    print "estamos dentro del rango de ano"
+                    if mes_inicio3 >= mes_inicio and mes_inicio3 <=mes_inicio2:
+                        print "estamos en el rago de meses"
+                        if dia_inicio3 >= dia_inicio and dia_inicio3 <=dia_inicio2:
+                            print "estamos en el rago de dias"
+                            html = render_to_string('serv_empl_pdf.html', {'pagesize':'A4', 'empleado':empleado_ingresado, 'servicios':servicios,'fecha_hoy':fecha_hoy ,'fecha_inicio':fecha_inicio,'fecha_fin':fecha_fin },context_instance=RequestContext(request))
+                            return generar_pdf(html)
+                        else:
+                            print "fuera de rango"
+                    else:
+                        print "fuera de rango"
+                else:
+                    print "fuera de rango"
+
 
 
     return render(request, template, locals())

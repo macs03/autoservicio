@@ -18,17 +18,7 @@
           <form action="" method="get" enctype="multipart/form-data" class="form border-emp">
 
             {% csrf_token %}
-            <label for="quincenas_select" class="control-label required-field "> Número de Quincenas </label>
-            <div>
-                <select id="quincenas_select" class="form-control" name="quincenas">
-                <option value="none">---</option>
-                {% for quincena in quincenas %}
-                <option  value="{{ quincena.numero_quincena }}" id="quincena">{{ quincena.numero_quincena }}</option>
-                {% endfor %}
-                </select>
-            </div>
-              <br/>
-              <br/>
+              {{ nomina_form|as_bootstrap  }}
 
           <input type="submit" value="{{ value_boton }}" class="btn btn-primary">
       </form>

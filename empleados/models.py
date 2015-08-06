@@ -120,4 +120,9 @@ class BancosForm(ModelForm):
 class NominaForm(ModelForm):
     class Meta:
         model = Quincenas
-        fields = ('fecha_inicio','fecha_fin')
+        fields = ('numero_quincena',)
+
+class ServEmpForm(ModelForm):
+    class Meta:
+        model = Empleados
+        fields = ('cedula',)

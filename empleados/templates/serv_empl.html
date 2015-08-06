@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+
+{% block content %}
+
+
+    <div class="title">
+      <h1>Servicio Empleado <i class="fa fa-cogs "></i><i class="fa fa-wrench "></i></h1>
+    </div>
+    <div class="row mt-40">
+      <div class="content-form col-lg-5 ">
+          <div class="title-form bg-emp">
+            <span>Resumen de Servicio Empleado</span>
+            <i class="fa fa-cogs pull-right"></i>
+            <i class="fa fa-wrench pull-right"></i>
+          </div>
+
+          <form action="" method="get" enctype="multipart/form-data" class="form border-emp">
+
+            {% csrf_token %}
+            {{ ser_empl_form|as_bootstrap  }}
+              <label for="id_fecha_inicio">Fecha Inicio</label> <br/>
+              <input type="date" id="id_fecha_inicio" name="fecha_inicio"/> <br/><br/>
+              <label for="id_fecha_fin">Fecha Fin</label> <br/>
+              <input type="date" id ="id_fecha_fin" name="fecha_fin"/>
+
+              <br/>
+              <br/>
+
+          <input type="submit" value="{{ value_boton }}" class="btn btn-primary">
+      </form>
+
+      </div>
+
+    </div>
+{% endblock %}

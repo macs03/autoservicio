@@ -100,6 +100,7 @@
            <tr>
              <th >Servicios</th>
              <th >Precio</th>
+             <th >IVA 12%</th>
            </tr>
         </thead>
 
@@ -109,7 +110,8 @@
 
            <tr>
              <td>{{ servicio.servicio }}</td>
-             <td>{{ servicio.costo }}</td>
+             <td>{{ servicio.costo }} </td>
+             <td> {{ servicio.costo }} </td>
            </tr>
            
         </tbody> 
@@ -124,6 +126,7 @@
            <tr>
              <th >Productos</th>
              <th >Precio</th>
+             <th >IVA 12%</th>
            </tr>
         </thead>
 
@@ -132,22 +135,31 @@
         <tbody>
            <tr>
              <td>{{ producto.nombre }}</td>
-             <td>{{ producto.precio }}</td>
+             <td>{{ producto.precio }} x </td>
+             <td> {{ producto.precio }}</td>
            </tr>
            
         </tbody> 
         {% endfor %}
  </table>
       <div class="total" style="text-align: right">
-          <h4>Total: <span>{{factura.total}}Bsf</span></h4>
+          <h5>BI: <span>{{factura.total}}BsF</span></h5>
+          <h5>IVA: <span>{{factura_iva}}BsF</span></h5>
+          <h4>TOTAL: <span>{{factura_total}}BsF</span></h4>
       </div>
       {% if banco != None %}
       <div style="text-align:right">
-        <span><strong>Banco:</strong> {{banco}}</span>
+        <span><strong>Banco:</strong> {{banco.nombre}} {{banco.cuenta}}</span>
       </div>
       {% endif %}
+
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <h2 style="text-align: right"><strong>MUCHAS GRACIAS POR SU COMPRA</strong></h2>
   </div>
-   
+
     
 </body>
 </html>

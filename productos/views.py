@@ -95,6 +95,10 @@ def facturas(request):
 
         factura = Factura(cliente_vehiculo=cliente_vehiculo, fecha=fecha, total=total, banco=banco)
         factura.save()
+        #factura_iva = facturas[0].total * 0.12
+        #print factura_iva
+        #factura_total = factura_iva + facturas[0].total
+        print factura_total
         print dict(request.POST)["productos"]
         for servicio_pk in dict(request.POST)["servicios"]:
             servicio = get_object_or_404(Servicios_Realizados, pk=servicio_pk)
@@ -112,7 +116,7 @@ def facturas(request):
         serviciosFactura = factura.servicios.all()
         productosFactura = factura.productos.all()
 
-        html = render_to_string('factura_pdf.html', {'pagesize':'A4', 'factura':factura,  'servicios': serviciosFactura, 'productos': productosFactura,'fecha_hoy':fecha_hoy,'banco':banco},context_instance=RequestContext(request))
+        html = render_to_string('factura_pdf.html', {'pagesize':'A4', 'factura':factura,  'servicios': serviciosFactura, 'productos': productosFactura,'fecha_hoy':fecha_hoy,'banco':banco, 'factura_iva':factura_iva, 'factura_total':factura_total},context_instance=RequestContext(request))
         return generar_pdf(html)
         #return HttpResponseRedirect('/administracion/facturas/')
 
