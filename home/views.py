@@ -29,6 +29,8 @@ def resultado(request):
             placaObj = get_object_or_404(Vehiculos, placa__icontains=placa)
             #vehiculos = Vehiculos.objects.filter(placa__icontains=placa)
             vehiculo_cliente = Vehiculo_Clientes.objects.filter(vehiculo=placaObj)
+            print "vehiculo encontrado"
+            print vehiculo_cliente
             servicio_realizado = Servicios_Realizados.objects.all()
             for servicio in servicio_realizado:
                 placa =  servicio.vehiculo_cliente.vehiculo
@@ -39,7 +41,7 @@ def resultado(request):
                     print placaexito
                     servicios_hechos =  Servicios_Realizados.objects.filter(vehiculo_cliente = placaexito)
                     print servicios_hechos
-        return render(request, template, {'vehiculo_cliente': vehiculo_cliente, 'placa': placa , 'servicios_hechos' : servicios_hechos})        
+            return render(request, template, {'vehiculo_cliente': vehiculo_cliente, 'placa': placa , 'servicios_hechos' : servicios_hechos})
             
 
     return render(request,"index.html",{'errors': errors})

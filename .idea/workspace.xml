@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd5e6345-0e08-497f-88e6-f633c59b0528" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/productos/templates/factura_pdf.html" afterPath="$PROJECT_DIR$/productos/templates/factura_pdf.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/templates/index.html" afterPath="$PROJECT_DIR$/home/templates/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/templates/result.html" afterPath="$PROJECT_DIR$/home/templates/result.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/productos/views.py" afterPath="$PROJECT_DIR$/productos/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/empleados/templates/nomina.html" afterPath="$PROJECT_DIR$/empleados/templates/nomina.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/empleados/templates/serv_empl_pdf.html" afterPath="$PROJECT_DIR$/empleados/templates/serv_empl_pdf.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/empleados/views.py" afterPath="$PROJECT_DIR$/empleados/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home/views.py" afterPath="$PROJECT_DIR$/home/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="autoservicio.iws" />
@@ -39,32 +39,58 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/home/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="750">
+              <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/empleados/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5771144" vertical-offset="1752" max-vertical-offset="7380">
+              <caret line="140" column="86" selection-start-line="140" selection-start-column="86" selection-end-line="140" selection-end-column="86" />
+              <folding>
+                <element signature="e#0#54#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/home/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.5" vertical-offset="3246" max-vertical-offset="3855">
-              <caret line="238" column="69" selection-start-line="238" selection-start-column="29" selection-end-line="238" selection-end-column="69" />
+            <state vertical-scroll-proportion="-13.5" vertical-offset="1101" max-vertical-offset="3855">
+              <caret line="95" column="39" selection-start-line="91" selection-start-column="28" selection-end-line="95" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="result.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/home/templates/result.html">
+      <file leaf-file-name="nomina.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/empleados/templates/nomina.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.916666" vertical-offset="1328" max-vertical-offset="2280">
-              <caret line="122" column="100" selection-start-line="122" selection-start-column="100" selection-end-line="122" selection-end-column="100" />
-              <folding />
+            <state vertical-scroll-proportion="-16.25" vertical-offset="0" max-vertical-offset="600">
+              <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
+              <folding>
+                <element signature="n#style#0;n#p#0;n#form#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="factura_pdf.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/productos/templates/factura_pdf.html">
+      <file leaf-file-name="nomina_pdf.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/empleados/templates/nomina_pdf.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30405405" vertical-offset="0" max-vertical-offset="2565">
-              <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
-              <folding />
+            <state vertical-scroll-proportion="-3.76" vertical-offset="952" max-vertical-offset="3300">
+              <caret line="76" column="33" selection-start-line="76" selection-start-column="27" selection-end-line="76" selection-end-column="33" />
+              <folding>
+                <element signature="n#style#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -95,14 +121,15 @@
         <option value="$PROJECT_DIR$/servicios/templates/base.html" />
         <option value="$PROJECT_DIR$/empleados/urls.py" />
         <option value="$PROJECT_DIR$/empleados/models.py" />
-        <option value="$PROJECT_DIR$/empleados/templates/nomina.html" />
         <option value="$PROJECT_DIR$/empleados/templates/serv_empl.html" />
-        <option value="$PROJECT_DIR$/empleados/views.py" />
-        <option value="$PROJECT_DIR$/empleados/templates/serv_empl_pdf.html" />
         <option value="$PROJECT_DIR$/productos/views.py" />
         <option value="$PROJECT_DIR$/home/templates/result.html" />
         <option value="$PROJECT_DIR$/home/templates/index.html" />
         <option value="$PROJECT_DIR$/productos/templates/factura_pdf.html" />
+        <option value="$PROJECT_DIR$/home/views.py" />
+        <option value="$PROJECT_DIR$/empleados/templates/serv_empl_pdf.html" />
+        <option value="$PROJECT_DIR$/empleados/templates/nomina.html" />
+        <option value="$PROJECT_DIR$/empleados/views.py" />
       </list>
     </option>
   </component>
@@ -285,6 +312,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="home" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="autoservicio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="autoservicio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="empleados" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="autoservicio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="autoservicio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="empleados" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -549,6 +608,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="770" max-vertical-offset="5670">
           <caret line="68" column="12" selection-start-line="68" selection-start-column="12" selection-end-line="68" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -556,6 +618,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="660">
           <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+          <folding>
+            <element signature="n#style#0;n#p#0;n#form#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -577,6 +642,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="780" max-vertical-offset="1920">
           <caret line="52" column="19" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -591,6 +657,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.048543688" vertical-offset="0" max-vertical-offset="618">
           <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -691,6 +758,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1400" max-vertical-offset="1980">
           <caret line="122" column="36" selection-start-line="122" selection-start-column="36" selection-end-line="122" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -708,45 +776,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/empleados/templates/serv_empl_pdf.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.6726619" vertical-offset="0" max-vertical-offset="1665">
-          <caret line="62" column="58" selection-start-line="62" selection-start-column="58" selection-end-line="62" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/empleados/templates/nomina_pdf.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05272408" vertical-offset="870" max-vertical-offset="3300">
-          <caret line="60" column="59" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/home/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46551725" vertical-offset="75" max-vertical-offset="720">
-          <caret line="28" column="75" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/empleados/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5580589" vertical-offset="6638" max-vertical-offset="7215">
-          <caret line="464" column="101" selection-start-line="464" selection-start-column="93" selection-end-line="464" selection-end-column="101" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/empleados/templates/nomina.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5067568" vertical-offset="0" max-vertical-offset="592">
-          <caret line="20" column="45" selection-start-line="20" selection-start-column="45" selection-end-line="20" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/servicios/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.38860103" vertical-offset="300" max-vertical-offset="1800">
           <caret line="35" column="167" selection-start-line="35" selection-start-column="91" selection-end-line="35" selection-end-column="167" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home/templates/result.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.847973" vertical-offset="1328" max-vertical-offset="2280">
+          <caret line="122" column="100" selection-start-line="122" selection-start-column="100" selection-end-line="122" selection-end-column="100" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/productos/templates/factura_pdf.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2027027" vertical-offset="0" max-vertical-offset="2565">
+          <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -758,27 +807,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/home/templates/result.html">
+    <entry file="file://$PROJECT_DIR$/empleados/templates/serv_empl_pdf.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.916666" vertical-offset="1328" max-vertical-offset="2280">
-          <caret line="122" column="100" selection-start-line="122" selection-start-column="100" selection-end-line="122" selection-end-column="100" />
-          <folding />
+        <state vertical-scroll-proportion="0.4974093" vertical-offset="597" max-vertical-offset="1665">
+          <caret line="59" column="12" selection-start-line="59" selection-start-column="12" selection-end-line="59" selection-end-column="12" />
+          <folding>
+            <element signature="n#style#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/empleados/templates/nomina_pdf.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.76" vertical-offset="952" max-vertical-offset="3300">
+          <caret line="76" column="33" selection-start-line="76" selection-start-column="27" selection-end-line="76" selection-end-column="33" />
+          <folding>
+            <element signature="n#style#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/home/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.5" vertical-offset="3246" max-vertical-offset="3855">
-          <caret line="238" column="69" selection-start-line="238" selection-start-column="29" selection-end-line="238" selection-end-column="69" />
+        <state vertical-scroll-proportion="-13.5" vertical-offset="1101" max-vertical-offset="3855">
+          <caret line="95" column="39" selection-start-line="91" selection-start-column="28" selection-end-line="95" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/productos/templates/factura_pdf.html">
+    <entry file="file://$PROJECT_DIR$/home/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30405405" vertical-offset="0" max-vertical-offset="2565">
-          <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="750">
+          <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="58" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/empleados/templates/nomina.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.25" vertical-offset="0" max-vertical-offset="600">
+          <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
+          <folding>
+            <element signature="n#style#0;n#p#0;n#form#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/empleados/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5771144" vertical-offset="1752" max-vertical-offset="7380">
+          <caret line="140" column="86" selection-start-line="140" selection-start-column="86" selection-end-line="140" selection-end-column="86" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

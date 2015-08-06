@@ -20,6 +20,12 @@
             {% csrf_token %}
               {{ nomina_form|as_bootstrap  }}
 
+              {% if errors %}
+              {% for error in errors %}
+              <p style="color: red;">{{ error }}</p>
+              {% endfor %}
+              {% endif %}
+
           <input type="submit" value="{{ value_boton }}" class="btn btn-primary">
       </form>
 

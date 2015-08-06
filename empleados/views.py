@@ -69,9 +69,9 @@ def nomina(request):
             print request.GET
             print "-------------------quincena"
             numero_quincena = request.GET['numero_quincena']
+            print numero_quincena
             if not numero_quincena:
-                print "no hay quincena"
-                errors.append('Por favor introduce un numero de quincena')
+                print "quincena no valida"
             else:
                 print "si hay quincena"
                 #quincena_valida = get_object_or_404(Quincenas, numero_quincena=numero_quincena)
@@ -79,61 +79,70 @@ def nomina(request):
                 print type(numero_quincena)
                 numero = int(numero_quincena)
                 quincena_valida = Quincenas.objects.filter(numero_quincena = numero).order_by('pk')
-                print quincena_valida
-                fecha_inicio = quincena_valida[0].fecha_inicio
-                print fecha_inicio
-                fecha_fin = quincena_valida[0].fecha_fin
-                print fecha_fin
-                fecha_final = str(fecha_fin)
-                corte = fecha_final.split('-')
-                print "ultimo dia ----"
-                dia_final = corte[2]
-                print dia_final
-                print type(fecha_final)
-                consulta2 = None
-                fecha_inicio_c = None
-                fecha_fin_C = None
-                acum_nomina = 0
-                acum_cestaticket = 0
-                for dato in quincena_valida:
-                    print dato.empleado.nombre
-                    print dato.empleado.apellido
-                    print dato.numero_quincena
-                    print dato.dias_laborados
-                    print dato.bono1_pagar
-                    print dato.bono2
-                    print dato.dias_descanso
-                    print dato.dias_feriados
-                    print dato.asignaciones_dia_laborado
-                    asignaciones = dato.asignaciones_dia_laborado + dato.asignaciones_dia_feriado
-                    print asignaciones
-                    print dato.SSO
-                    print dato.SPF
-                    print dato.LPH
-                    print dato.dias_no_laborados
-                    print dato.prestamos
-                    deducciones = dato.SSO - dato.SPF - dato.LPH
-                    print deducciones
-                    print dato.total_pagar
-                    acum_nomina = acum_nomina + dato.total_pagar
+                #quincena_valida = get_object_or_404(Quincenas, numero_quincena = numero).order_by('pk')
+                if quincena_valida:
+                    print quincena_valida
+                    fecha_inicio = quincena_valida[0].fecha_inicio
+                    print fecha_inicio
+                    fecha_fin = quincena_valida[0].fecha_fin
+                    print fecha_fin
+                    fecha_final = str(fecha_fin)
+                    corte = fecha_final.split('-')
+                    print "ultimo dia ----"
+                    dia_final = corte[2]
+                    print dia_final
+                    print type(fecha_final)
+                    consulta2 = None
+                    fecha_inicio_c = None
+                    fecha_fin_C = None
+                    acum_nomina = 0
+                    acum_cestaticket = 0
+                    for dato in quincena_valida:
+                        print dato.empleado.nombre
+                        print dato.empleado.apellido
+                        print dato.numero_quincena
+                        print dato.dias_laborados
+                        print dato.bono1_pagar
+                        print dato.bono2
+                        print dato.dias_descanso
+                        print dato.dias_feriados
+                        print dato.asignaciones_dia_laborado
+                        asignaciones = dato.asignaciones_dia_laborado + dato.asignaciones_dia_feriado
+                        print asignaciones
+                        print dato.SSO
+                        print dato.SPF
+                        print dato.LPH
+                        print dato.dias_no_laborados
+                        print dato.prestamos
+                        deducciones = dato.SSO - dato.SPF - dato.LPH
+                        print deducciones
+                        print dato.total_pagar
+                        acum_nomina = acum_nomina + dato.total_pagar
 
-                if dia_final == '31' or dia_final == '30' or dia_final == '29' or dia_final == '28' :
-                    print "hay cestaticket"
-                    consulta2 = Cestatickets.objects.filter(fecha_fin=fecha_fin).order_by('pk')
-                    fecha_inicio_c = consulta2[0].fecha_inicio
-                    fecha_fin_C = consulta2[0].fecha_fin
-                    for ticket in consulta2:
-                        print ticket.empleado.nombre
-                        print ticket.empleado.apellido
-                        print ticket.empleado.cedula
-                        print ticket.fecha_inicio
-                        print ticket.fecha_fin
-                        print ticket.total_pagar
-                        acum_cestaticket = acum_cestaticket + ticket.total_pagar
+                    if dia_final == '31' or dia_final == '30' or dia_final == '29' or dia_final == '28' :
+                        print "hay cestaticket"
+                        consulta2 = Cestatickets.objects.filter(fecha_fin=fecha_fin).order_by('pk')
+                        fecha_inicio_c = consulta2[0].fecha_inicio
+                        fecha_fin_C = consulta2[0].fecha_fin
+                        for ticket in consulta2:
+                            print ticket.empleado.nombre
+                            print ticket.empleado.apellido
+                            print ticket.empleado.cedula
+                            print ticket.fecha_inicio
+                            print ticket.fecha_fin
+                            print ticket.total_pagar
+                            acum_cestaticket = acum_cestaticket + ticket.total_pagar
 
 
-                html = render_to_string('nomina_pdf.html', {'pagesize':'A4', 'nomina':quincena_valida, 'cestaticket':consulta2,'fecha_hoy':fecha_hoy ,'fecha_inicio':fecha_inicio,'fecha_fin':fecha_fin ,'fecha_inicio_c' : fecha_inicio_c ,'fecha_fin_C': fecha_fin_C, 'acum_nomina':acum_nomina,'acum_cestaticket':acum_cestaticket},context_instance=RequestContext(request))
-                return generar_pdf(html)
+                    html = render_to_string('nomina_pdf.html', {'pagesize':'A4', 'nomina':quincena_valida, 'cestaticket':consulta2,'fecha_hoy':fecha_hoy ,'fecha_inicio':fecha_inicio,'fecha_fin':fecha_fin ,'fecha_inicio_c' : fecha_inicio_c ,'fecha_fin_C': fecha_fin_C, 'acum_nomina':acum_nomina,'acum_cestaticket':acum_cestaticket},context_instance=RequestContext(request))
+                    return generar_pdf(html)
+                else:
+                    print "quincena no valida"
+                    errors.append('Por favor introduce un numero de quincena existente')
+        else:
+            print "no hay quincena"
+            errors.append('Por favor introduce un numero de quincena valido')
+
 
     return render(request, template, locals())
 
@@ -433,7 +442,9 @@ def serv_empl(request):
             print  ano_inicio2
             ano_inicio_I2 = int(ano_inicio2)
 
-            empleado_ingresado = Empleados.objects.filter(cedula = empleado)
+            print "empleado encontrado"
+            #empleado_ingresado = Empleados.objects.filter(cedula = empleado)
+            empleado_ingresado = get_object_or_404(Empleados, cedula = empleado)
             print empleado_ingresado
 
             servicios = Servicios_Realizados.objects.filter(empleado = empleado_ingresado)
