@@ -98,7 +98,7 @@ def facturas(request):
         #factura_iva = facturas[0].total * 0.12
         #print factura_iva
         #factura_total = factura_iva + facturas[0].total
-        print factura_total
+        #print factura_total
         print dict(request.POST)["productos"]
         for servicio_pk in dict(request.POST)["servicios"]:
             servicio = get_object_or_404(Servicios_Realizados, pk=servicio_pk)
