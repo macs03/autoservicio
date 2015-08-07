@@ -69,7 +69,7 @@ def productos_delete(request, pk_id):
 @login_required(login_url='/administracion')
 def facturas(request):
     template = "factura.html"
-    facturas = Factura.objects.all()
+    facturas = Factura.objects.all().order_by('-fecha')
     servicios = Servicios_Realizados.objects.all()
     bancos = Bancos.objects.all()
     fecha_hoy = time.strftime("%d/%m/%y")
@@ -95,28 +95,55 @@ def facturas(request):
 
         factura = Factura(cliente_vehiculo=cliente_vehiculo, fecha=fecha, total=total, banco=banco)
         factura.save()
-        #factura_iva = facturas[0].total * 0.12
-        #print factura_iva
-        #factura_total = factura_iva + facturas[0].total
-        #print factura_total
+
+        factura_actualizar = Factura.objects.filter(pk = factura.pk)
+        print factura_actualizar
+
+        factura_iva = factura_actualizar[0].total * 0.12
+        print "iva"
+        print factura_iva
+
+        factura_total = factura_iva + factura_actualizar[0].total
+        print "total"
+        print factura_total
+
+        listaIvaServicio = []
         print dict(request.POST)["productos"]
         for servicio_pk in dict(request.POST)["servicios"]:
             servicio = get_object_or_404(Servicios_Realizados, pk=servicio_pk)
             factura.servicios.add(servicio)
+            listaIvaServicio.append(servicio.costo * 0.12)
 
-
+        listaCantidad = []
+        listaImporte = []
+        listaIVA = []
         for producto_pk in dict(request.POST)["productos"]:
             producto = get_object_or_404(Productos, pk = producto_pk)
             cantidad = request.POST['cantidad-'+str(producto.pk)];
             cantidad = int(cantidad)
-            producto.cantidad = producto.cantidad - cantidad
+            listaCantidad.append(cantidad)
+            producto.cantidad -= cantidad
+            listaImporte.append(producto.precio * cantidad)
+            listaIVA.append((producto.precio * cantidad)*0.12)
             producto.save()
             factura.productos.add(producto)
+        for cantidad in listaCantidad:
+            print "cantidades"
+            print cantidad
+        for importe in listaImporte:
+            print "importes"
+            print importe
+        for iva in listaIVA:
+            print "iva"
+            print iva
+        for iva in listaIvaServicio:
+            print "IVA servicio"
+            print iva
 
         serviciosFactura = factura.servicios.all()
         productosFactura = factura.productos.all()
 
-        html = render_to_string('factura_pdf.html', {'pagesize':'A4', 'factura':factura,  'servicios': serviciosFactura, 'productos': productosFactura,'fecha_hoy':fecha_hoy,'banco':banco, 'factura_iva':factura_iva, 'factura_total':factura_total},context_instance=RequestContext(request))
+        html = render_to_string('factura_pdf.html', {'pagesize':'A4', 'factura':factura,  'servicios': serviciosFactura, 'productos': productosFactura,'fecha_hoy':fecha_hoy,'banco':banco,"iva_total":factura_iva,"totalConIva":factura_total},context_instance=RequestContext(request))
         return generar_pdf(html)
         #return HttpResponseRedirect('/administracion/facturas/')
 
@@ -134,14 +161,29 @@ def facturas_delete(request, pk_id):
 
 @login_required(login_url='/administracion')
 def facturas_print(request, pk_id):
-    factura_instance = get_object_or_404(Factura, pk = pk_id)
+    factura_actualizar = get_object_or_404(Factura, pk = pk_id)
+    print factura_actualizar
+
+    factura_iva = factura_actualizar.total * 0.12
+    print "iva"
+    print factura_iva
+
+    factura_total = factura_iva + factura_actualizar.total
+    print "total"
+    print factura_total
+
     fecha_hoy = time.strftime("%d/%m/%y")
     consulta = Factura.objects.filter(pk = pk_id)
     banco = consulta[0].banco
     print banco
+
+
     serviciosFactura = consulta[0].servicios.all()
+
     productosFactura = consulta[0].productos.all()
-    html = render_to_string('factura_pdf.html', {'pagesize':'A4', 'factura':consulta[0],'fecha_hoy':fecha_hoy,'servicios': serviciosFactura, 'productos': productosFactura,'banco':banco},context_instance=RequestContext(request))
+
+
+    html = render_to_string('factura_pdf.html', {'pagesize':'A4', 'factura':consulta[0],'fecha_hoy':fecha_hoy,'servicios': serviciosFactura, 'productos': productosFactura,'banco':banco,"iva_total":factura_iva,"totalConIva":factura_total},context_instance=RequestContext(request))
     return generar_pdf(html)
 
 

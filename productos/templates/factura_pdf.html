@@ -96,12 +96,14 @@
       </div>
        <table style="  width: 100%;  text-align: center;">
 
-    <caption>Servicios</caption>
+    <caption><strong>SERVICIOS</strong></caption>
+
         <thead>
+            <br/>
+           <br/>
            <tr>
              <th >Servicios</th>
              <th >Precio</th>
-             <th >IVA 12%</th>
            </tr>
         </thead>
 
@@ -112,22 +114,25 @@
            <tr>
              <td>{{ servicio.servicio }}</td>
              <td>{{ servicio.costo }} </td>
-             <td> {{ servicio.costo }} </td>
            </tr>
-           
+
         </tbody> 
         {% endfor %}
+
+
 
  </table>
      
        <table style="  width: 100%;  text-align: center;">
 
-    <caption>Productos</caption>
+    <caption><strong>PRODUCTOS</strong></caption>
+
         <thead>
+        <br/>
+           <br/>
            <tr>
              <th >Productos</th>
              <th >Precio</th>
-             <th >IVA 12%</th>
            </tr>
         </thead>
 
@@ -136,17 +141,22 @@
         <tbody>
            <tr>
              <td>{{ producto.nombre }}</td>
-             <td>{{ producto.precio }} x </td>
-             <td> {{ producto.precio }}</td>
-           </tr>
+             <td>{{ producto.precio }} </td>
            
-        </tbody> 
+        </tbody>
         {% endfor %}
+
+
  </table>
+
+      <br/>
+      <br/>
+      <br/>
+      <br/>
       <div class="total" style="text-align: right">
           <h5>BI: <span>{{factura.total}}BsF</span></h5>
-          <h5>IVA: <span>{{factura_iva}}BsF</span></h5>
-          <h4>TOTAL: <span>{{factura_total}}BsF</span></h4>
+          <h5>IVA: <span>{{iva_total}}BsF</span></h5>
+          <h4>TOTAL: <span>{{totalConIva}}BsF</span></h4>
       </div>
       {% if banco != None %}
       <div style="text-align:right">
