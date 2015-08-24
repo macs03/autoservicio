@@ -389,7 +389,7 @@ def bancos_edit(request, pk_id):
 
         return HttpResponseRedirect('/administracion/bancos')
     else:
-        constantes_form = ConstantesForm(instance=bancos_instance)
+        bancos_form = BancosForm(instance=bancos_instance)
 
 
     return render(request, template, locals())
