@@ -1,5 +1,5 @@
 from django.db import models
-from vehiculos.models import Vehiculo_Clientes
+from clientes.models import Clientes
 from servicios.models import Servicios_Realizados, Servicios
 from empleados.models import Bancos, TipoEgreso
 from django.forms import ModelForm
@@ -16,9 +16,9 @@ class Productos(models.Model):
 
 
 class Factura(models.Model):
-	cliente_vehiculo = models.ForeignKey(Vehiculo_Clientes)
-	servicios = models.ManyToManyField(Servicios_Realizados)
-	productos = models.ManyToManyField(Productos)
+	cliente_vehiculo = models.ForeignKey(Clientes)
+	servicios = models.ManyToManyField(Servicios_Realizados, blank=True)
+	productos = models.ManyToManyField(Productos, blank=True)
 	banco = models.ForeignKey(Bancos, blank=True ,null=True)
 	fecha = models.DateField()
 	total = models.FloatField()

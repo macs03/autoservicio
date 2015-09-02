@@ -5,7 +5,7 @@ class Empleados(models.Model):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     cedula = models.CharField(max_length=100)
-    sueldo_base = models.FloatField()
+    # sueldo_base = models.FloatField()
     cargo = models.CharField(max_length=100)
     hoja_de_vida = models.FileField(upload_to='media/archivos/')
 
@@ -48,29 +48,29 @@ class Cestatickets(models.Model):
 
 
 class Quincenas(models.Model):
-    numero_semana_1 = models.IntegerField()
-    numero_semana_2 = models.IntegerField()
-    numero_quincena = models.IntegerField()
+    # numero_semana_1 = models.IntegerField()
+    numero_semana = models.IntegerField()
+    #numero_quincena = models.IntegerField()
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     empleado = models.ForeignKey(Empleados)
-    dias_mes = models.IntegerField()
-    dias_laborados = models.IntegerField()
-    asignaciones_dia_laborado = models.FloatField(null=True, blank=True)
-    bono1 = models.ForeignKey(Constantes_Administracion)
-    bono1_pagar = models.FloatField(null=True, blank=True)
-    bono2 = models.FloatField()
-    dias_descanso = models.IntegerField()
-    dias_feriados = models.IntegerField()
-    asignaciones_dia_feriado = models.FloatField(null=True, blank=True)
-    SSO = models.FloatField(null=True, blank=True)
-    SPF = models.FloatField(null=True, blank=True)
-    LPH = models.FloatField(null=True, blank=True)
-    dias_no_laborados = models.IntegerField()
-    prestamos = models.FloatField()
-    cantidad_lunes = models.IntegerField()
-    total_asignaciones = models.FloatField(null=True, blank=True)
-    total_deducciones = models.FloatField(null=True, blank=True)
+    # dias_mes = models.IntegerField()
+    # dias_laborados = models.IntegerField()
+    # asignaciones_dia_laborado = models.FloatField(null=True, blank=True)
+    # bono1 = models.ForeignKey(Constantes_Administracion)
+    # bono1_pagar = models.FloatField(null=True, blank=True)
+    # bono2 = models.FloatField()
+    # dias_descanso = models.IntegerField()
+    # dias_feriados = models.IntegerField()
+    # asignaciones_dia_feriado = models.FloatField(null=True, blank=True)
+    # SSO = models.FloatField(null=True, blank=True)
+    # SPF = models.FloatField(null=True, blank=True)
+    # LPH = models.FloatField(null=True, blank=True)
+    # dias_no_laborados = models.IntegerField()
+    prestamos = models.FloatField(null=True, blank=True)
+    # cantidad_lunes = models.IntegerField()
+    # total_asignaciones = models.FloatField(null=True, blank=True)
+    # total_deducciones = models.FloatField(null=True, blank=True)
     total_pagar = models.FloatField(null=True, blank=True)
 
     def __str__(self):
@@ -93,7 +93,7 @@ class TipoEgreso(models.Model):
 class EmpleadosForm(ModelForm):
     class Meta:
         model = Empleados
-        fields = ('nombre', 'apellido', 'cedula','sueldo_base','cargo', 'hoja_de_vida')
+        fields = ('nombre', 'apellido', 'cedula','cargo', 'hoja_de_vida')
 
 
 class CestaticketForm(ModelForm):
@@ -109,7 +109,7 @@ class ConstantesForm(ModelForm):
 class QuincenasForm(ModelForm):
     class Meta:
         model = Quincenas
-        fields = ('fecha_inicio','numero_semana_1','fecha_fin','numero_semana_2','dias_mes','numero_quincena','empleado','dias_laborados','bono1','bono2','dias_descanso','dias_feriados','dias_no_laborados','prestamos','cantidad_lunes')
+        fields = ('fecha_inicio','fecha_fin','numero_semana','empleado','prestamos')
 
 class BancosForm(ModelForm):
     class Meta:
@@ -120,7 +120,7 @@ class BancosForm(ModelForm):
 class NominaForm(ModelForm):
     class Meta:
         model = Quincenas
-        fields = ('numero_quincena',)
+        fields = ('numero_semana',)
 
 class ServEmpForm(ModelForm):
     class Meta:

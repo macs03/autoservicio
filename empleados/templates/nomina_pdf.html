@@ -64,13 +64,6 @@
 	     		<tr>
 	     			<th>Nombre</th>
 	     			<th>Nº</th>
-	     			<th>Sueldo</th>
-	     			<th>D.Laborados</th>
-	     			<th>Bono1</th>
-	     			<th>Bono2</th>
-	     			<th>D.Descanso</th>
-	     			<th>D.Feriado</th>
-	     			<th>TOTAL ASIG.</th>
 	     			<th>TOTAL</th>
 	     		</tr>
 	     	</thead>
@@ -82,27 +75,6 @@
 	    			</td>
 	    			<td>
 	    				{{dato.empleado.pk}}
-	    			</td>
-	    			<td>
-	    				{{dato.empleado.sueldo_base}}
-	    			</td>
-	    			<td>
-	    				{{dato.dias_laborados}}
-	    			</td>
-	    			<td>
-	    				{{dato.bono1_pagar}}
-	    			</td>
-	    			<td>
-	    				{{dato.bono2}}
-	    			</td>
-	    			<td>
-	    				{{dato.dias_descanso}}
-	    			</td>
-	    			<td>
-	    				{{dato.dias_feriados}}
-	    			</td>
-	    			<td>
-	    				{{dato.total_asignaciones}}
 	    			</td>
 	    			<td>
 	    				{{dato.total_pagar}}
@@ -114,55 +86,7 @@
 	    </table>
 	    
 	    <br>
-	    <table style="  width: 100%;  text-align: center;">
-	     	<span><strong>DEDUCCIONES</strong></span>
-	     	<thead>
-	     		<tr>
-	     			<th>Nombre</th>
-	     			<th>Nº</th>
-	     			<th>S.S.O </th>
-	     			<th>S.P.F</th>
-	     			<th>L.P.H</th>
-	     			<th>D.no Laborados</th>
-	     			<th>Prestamos</th>
-	     			<th>TOTAL DEDUC</th>
-	     			<th>TOTAL</th>
-	     		</tr>
-	     	</thead>
-	     	{% for dato in nomina %}
-	    	<tbody>
-	    		<tr>
-	    			<td>
-	    				{{dato.empleado.nombre}} {{dato.empleado.apellido}}
-	    			</td>
-	    			<td>
-	    				{{dato.empleado.pk}}
-	    			</td>
-	    			<td>
-	    				{{dato.SSO}}
-	    			</td>
-	    			<td>
-	    				{{dato.SPF}}
-	    			</td>
-	    			<td>
-	    				{{dato.LPH}}
-	    			</td>
-	    			<td>
-	    				{{dato.dias_no_laborados}}
-	    			</td>
-	    			<td>
-	    				{{dato.prestamos}}
-	    			</td>
-	    			<td>
-	    				{{dato.total_deducciones}}
-	    			</td>
-	    			<td>
-	    				{{dato.total_pagar}}
-	    			</td>
-	    		</tr>
-	    	</tbody>
-	    	{%  endfor %}
-	    </table>
+
 	    
 	    <br>
 	    <br>

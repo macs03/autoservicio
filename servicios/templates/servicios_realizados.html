@@ -26,12 +26,18 @@
           <table class="table table-hover">
             <thead>
                <th>Servicio</th>
+               <th>Fecha</th>
+               <th>Cliente</th>
+               <th>Empleado</th>
                <th>Acciones</th>
             </thead>
             <tbody>
                {% for servicio in servicios_realizados %}
               <tr>
                 <td>{{servicio.servicio}}</td>
+                  <td>{{servicio.fecha}}</td>
+                  <td>{{servicio.vehiculo_cliente}}</td>
+                  <td>{{servicio.empleado}}</td>
                 <td> 
                     <span><a href= "{% url "editServicioRealizado" servicio.pk %}"><i class="fa fa-pencil-square-o"></i></a></span>  
                     <span><a  style="color: red" href= "{% url "deleteServicioRealizado" servicio.pk %}"><i class="fa fa-trash-o"></i></a></span>   

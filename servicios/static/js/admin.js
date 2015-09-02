@@ -31,13 +31,17 @@ $(function(){
 				"id": id
 			},
 			success : function(json) {
-				console.log(json);
-				 $('#serviciosRealizado').empty();
-				for (var i = json.length - 1; i >= 0; i--) {
-					
+				console.log("añadiendo el vacio");
+                console.log(json);
+                $('#serviciosRealizado').empty();
+                $('#serviciosRealizado').append($('<option>', {
+                    value: '0',
+                    text: 'N/A'
+                }));
+                for (var i = json.length - 1; i >= 0; i--) {
 					 $('#serviciosRealizado').append($('<option>', {
 					 		value: json[i]['id'],
-					 		text: json[i]['servicio']+' - '+json[i]['vehiculo_cliente']+' - '+json[i]['fecha']+' - '+json[i]['costo'] 
+					 		text: json[i]['servicio']+' - '+json[i]['vehiculo_cliente']+' - '+json[i]['fecha']+' - '+json[i]['costo']
 					 }));
 				};
       	    },
@@ -72,7 +76,7 @@ $(function(){
 		  servicios = str.split('_')
 		  for (var i = servicios.length - 1; i >= 0; i--) {
 		  	if(servicios[i].split('-')[6]){
-		  		precioStr = servicios[i].split('-')[7];
+		  		precioStr = servicios[i].split('-')[6];
 		  		precio = precio + parseInt(precioStr);
 		  		
 		  	}

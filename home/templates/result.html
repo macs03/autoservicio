@@ -29,14 +29,14 @@
 
                         <ul id="menu2" class="menu2 dis-user">
                             <li class="col-md-2">
-                                 {% for vehiculo in vehiculo_cliente %}
-                                    {{ vehiculo.cliente.nombre}}  {{ vehiculo.cliente.apellido }}
-                                {% endfor %}
+
+                                    {{ Cliente.nombre}}  {{ Cliente.apellido }}
+
                             </li>
                             <li class="col-md-2">
-                                {% for vehiculo in vehiculo_cliente %}
-                                    {{ vehiculo.vehiculo.marca}} , {{ vehiculo.vehiculo.modelo }}
-                                {% endfor %}
+
+                                    {{ Cliente.marca}} , {{ Cliente.modelo }}
+
                             </li>
                             <li><a href="/" class="toplink col-md-2 text-center">
                                 Volver
@@ -48,14 +48,14 @@
 		</div>
 		    <ul id="menu">
 			    <li>
-				    {% for vehiculo in vehiculo_cliente %}
-                        {{ vehiculo.cliente.nombre}}  {{ vehiculo.cliente.apellido }}
-                    {% endfor %}
+
+                         {{ Cliente.nombre}}  {{ Cliente.apellido }}
+
 			    </li>
 			    <li>
-				    {% for vehiculo in vehiculo_cliente %}
-                        {{ vehiculo.vehiculo.marca}} , {{ vehiculo.vehiculo.modelo }}
-                    {% endfor %}
+
+                        {{ Cliente.marca}} , {{ Cliente.modelo }}
+
 			    </li>
 			    <li><a href="/">
 				    Volver
@@ -67,14 +67,14 @@
 			<div class="dato-usuario">
 
 				<div class="carro col-md-6 col-xs-12 col-sm-12">
-                    {% for vehiculo in vehiculo_cliente %}
-                         {{ vehiculo.vehiculo.marca}} , {{ vehiculo.vehiculo.modelo }}
-                    {% endfor %}
+
+                        {{ Cliente.marca}} , {{ Cliente.modelo }}
+
 				</div>
 				<div class="usuario col-md-6 col-xs-12 col-sm-12">
-                    {% for vehiculo in vehiculo_cliente %}
-                         {{ vehiculo.cliente.nombre}}  {{ vehiculo.cliente.apellido }}
-                    {% endfor %}
+
+                         {{ Cliente.nombre}}  {{ Cliente.apellido }}
+
 				</div>
 
 			</div>
@@ -100,15 +100,15 @@
 				<div class="contenido col-md-12 col-sm-12 col-xs-12">
 					<div class="col-md-12 col-sm-12 col-xs-12 top-des-serv">
                         <span>Servicio</span>
-						<span>Productos</span>
+						<span>Kilometraje</span>
 						<span>Empleado</span>
 						<span>Costo</span>
                      </div>
                     <div class="col-md-12 col-sm-12 col-xs-12 des-serv">
 						<p class = "col-md-3 col-sm-3 col-xs-3">{{ servicio.servicio.nombre }}</p>
-                        <span>Productos</span>
+                        <span>{{servicio.km_servicio}} Km</span>
                         <span>{{ servicio.empleado.nombre }}</span>
-                        <span>{{ servicio.costo }} Bs</span>
+                        <span>{{ servicio.costo.valor }} Bs</span>
 					</div>
 				</div>
 			</div>

@@ -9,7 +9,7 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 @login_required(login_url='/administracion')
 def clientes(request):
 	template = "clientes.html"
-	clientes = Clientes.objects.all()
+	clientes = Clientes.objects.all().order_by("-id")
 	value_boton = "Agregar"
 	if request.method=='POST':
 		cliente_form = ClientesForm(request.POST)

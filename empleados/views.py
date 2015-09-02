@@ -101,21 +101,6 @@ def nomina(request):
                         print dato.empleado.nombre
                         print dato.empleado.apellido
                         print dato.numero_quincena
-                        print dato.dias_laborados
-                        print dato.bono1_pagar
-                        print dato.bono2
-                        print dato.dias_descanso
-                        print dato.dias_feriados
-                        print dato.asignaciones_dia_laborado
-                        asignaciones = dato.asignaciones_dia_laborado + dato.asignaciones_dia_feriado
-                        print asignaciones
-                        print dato.SSO
-                        print dato.SPF
-                        print dato.LPH
-                        print dato.dias_no_laborados
-                        print dato.prestamos
-                        deducciones = dato.SSO - dato.SPF - dato.LPH
-                        print deducciones
                         print dato.total_pagar
                         acum_nomina = acum_nomina + dato.total_pagar
 
@@ -240,103 +225,152 @@ def quincena(request):
 
             new_quincena = quincena_form.save()
             empleados = Servicios_Realizados.objects.filter(empleado=new_quincena.empleado)
+            total = 0
+            listaNombre = []
+            listaTipo = []
+            listaPagar = []
             for dato in empleados:
                 print dato
-                if dato.fecha < new_quincena.fecha_fin and dato.fecha > new_quincena.fecha_inicio:
+                if dato.fecha <= new_quincena.fecha_fin and dato.fecha >= new_quincena.fecha_inicio:
                     print "servicio hecho en quincena"
                     servicio_hechos = len(empleados)
                     print servicio_hechos
-                    bono1 = servicio_hechos * new_quincena.bono1.valor
-                    print bono1
-                    new_quincena.bono1_pagar = bono1
-                    sueldos = Empleados.objects.filter(nombre=new_quincena.empleado.nombre)
-                    print "sueldo base"
-                    print sueldos
-                    sueldo = sueldos[0].sueldo_base
-                    print sueldo
-                    print "------"
-                    asignacion_laborado = (sueldo/new_quincena.dias_mes)*new_quincena.dias_laborados
-                    print asignacion_laborado
-                    new_quincena.asignaciones_dia_laborado= asignacion_laborado
-                    #bono1 = servicio_hechos * new_quincena.bono1.valor
-                    #print bono1
-                    print new_quincena.bono2
-                    #new_quincena.bono1_pagar = bono1
-                    asignacion_feriado = (new_quincena.dias_feriados*(sueldo/new_quincena.dias_mes))*1.5
-                    print  asignacion_feriado
-                    new_quincena.asignaciones_dia_feriado = asignacion_feriado
-                    print "menos"
-                    SSO = (((sueldo * 12)/52)*new_quincena.cantidad_lunes)*0.4
-                    print SSO
-                    new_quincena.SSO = SSO
-                    SPF = (asignacion_laborado + asignacion_feriado) * 0.005
-                    print SPF
-                    new_quincena.SPF =SPF
-                    LPH = (asignacion_laborado + asignacion_feriado) * 0.01
-                    print LPH
-                    new_quincena.LPH = LPH
-                    total_asignacion = asignacion_laborado + asignacion_feriado + bono1 + new_quincena.bono2
-                    total_deduccion = SSO + SPF + LPH + new_quincena.prestamos
-                    new_quincena.total_asignaciones = total_asignacion
-                    new_quincena.total_deducciones = total_deduccion
-                    total = (asignacion_laborado + asignacion_feriado + bono1 + new_quincena.bono2) - (SSO + SPF + LPH)
-                    print total
-
+                    servicio_nombre = dato.servicio
+                    servicio_tipo = dato.tipo_servicio.tipo
+                    servicio_pagar = dato.tipo_servicio.valor
+                    print servicio_nombre
+                    print servicio_tipo
+                    print "a pagar"
+                    print servicio_pagar
+                    listaNombre.append(servicio_nombre)
+                    listaTipo.append(servicio_tipo)
+                    listaPagar.append(servicio_pagar)
+                    total = total + servicio_pagar
                     new_quincena.total_pagar = total
-
                     new_quincena.save()
                 else:
                     print "no hay servicios hechos"
-                    servicio_hechos = 0
-                    print servicio_hechos
-                    bono1 = servicio_hechos * new_quincena.bono1.valor
-                    print bono1
-                    new_quincena.bono1_pagar = bono1
-                    sueldos = Empleados.objects.filter(nombre=new_quincena.empleado.nombre)
-                    print "sueldo base"
-                    print sueldos
-                    sueldo = sueldos[0].sueldo_base
-                    print sueldo
-                    print "------"
-                    asignacion_laborado = (sueldo/new_quincena.dias_mes)*new_quincena.dias_laborados
-                    print asignacion_laborado
-                    new_quincena.asignaciones_dia_laborado= asignacion_laborado
-                    #bono1 = servicio_hechos * new_quincena.bono1.valor
-                    #print bono1
-                    print new_quincena.bono2
-                    #new_quincena.bono1_pagar = bono1
-                    asignacion_feriado = (new_quincena.dias_feriados*(sueldo/new_quincena.dias_mes))*1.5
-                    print  asignacion_feriado
-                    new_quincena.asignaciones_dia_feriado = asignacion_feriado
-                    print "menos"
-                    SSO = (((sueldo * 12)/52)*new_quincena.cantidad_lunes)*0.4
-                    print SSO
-                    new_quincena.SSO = SSO
-                    SPF = (asignacion_laborado + asignacion_feriado) * 0.005
-                    print SPF
-                    new_quincena.SPF =SPF
-                    LPH = (asignacion_laborado + asignacion_feriado) * 0.01
-                    print LPH
-                    total_asignacion = asignacion_laborado + asignacion_feriado + bono1 + new_quincena.bono2
-                    total_deduccion = SSO + SPF + LPH + new_quincena.prestamos
-                    new_quincena.total_asignaciones = total_asignacion
-                    new_quincena.total_deducciones = total_deduccion
-                    total = (asignacion_laborado + asignacion_feriado + bono1 + new_quincena.bono2) - (SSO + SPF + LPH)
-                    print total
-
                     new_quincena.total_pagar = total
-
                     new_quincena.save()
 
-
-            html = render_to_string('quincena_pdf.html', {'pagesize':'A4', 'quincena':new_quincena,'fecha_hoy':fecha_hoy},context_instance=RequestContext(request))
+            html = render_to_string('quincena_pdf.html', {'pagesize':'A4', 'quincena':new_quincena,'fecha_hoy':fecha_hoy,'servicios':empleados,'nombres':listaNombre,'tipos':listaTipo,'pagos':listaPagar},context_instance=RequestContext(request))
             return generar_pdf(html)
 
             #return HttpResponseRedirect('/administracion/empleados/quincena')
     else:
         quincena_form = QuincenasForm()
-
     return render(request, template, locals())
+
+# @login_required(login_url='/administracion')
+# def quincena(request):
+#     print "vista quincena"
+#     template = "quincena.html"
+#     quincena = Quincenas.objects.all()
+#     value_boton = "Generar"
+#     fecha_hoy = time.strftime("%d/%m/%y")
+#     if request.method == 'POST':
+#         quincena_form = QuincenasForm(request.POST, request.FILES)
+#         if quincena_form.is_valid():
+#
+#             new_quincena = quincena_form.save()
+#             empleados = Servicios_Realizados.objects.filter(empleado=new_quincena.empleado)
+#             for dato in empleados:
+#                 print dato
+#                 if dato.fecha < new_quincena.fecha_fin and dato.fecha > new_quincena.fecha_inicio:
+#                     print "servicio hecho en quincena"
+#                     servicio_hechos = len(empleados)
+#                     print servicio_hechos
+#                     bono1 = servicio_hechos * new_quincena.bono1.valor
+#                     print bono1
+#                     new_quincena.bono1_pagar = bono1
+#                     sueldos = Empleados.objects.filter(nombre=new_quincena.empleado.nombre)
+#                     print "sueldo base"
+#                     print sueldos
+#                     sueldo = sueldos[0].sueldo_base
+#                     print sueldo
+#                     print "------"
+#                     asignacion_laborado = (sueldo/new_quincena.dias_mes)*new_quincena.dias_laborados
+#                     print asignacion_laborado
+#                     new_quincena.asignaciones_dia_laborado= asignacion_laborado
+#                     #bono1 = servicio_hechos * new_quincena.bono1.valor
+#                     #print bono1
+#                     print new_quincena.bono2
+#                     #new_quincena.bono1_pagar = bono1
+#                     asignacion_feriado = (new_quincena.dias_feriados*(sueldo/new_quincena.dias_mes))*1.5
+#                     print  asignacion_feriado
+#                     new_quincena.asignaciones_dia_feriado = asignacion_feriado
+#                     print "menos"
+#                     SSO = (((sueldo * 12)/52)*new_quincena.cantidad_lunes)*0.4
+#                     print SSO
+#                     new_quincena.SSO = SSO
+#                     SPF = (asignacion_laborado + asignacion_feriado) * 0.005
+#                     print SPF
+#                     new_quincena.SPF =SPF
+#                     LPH = (asignacion_laborado + asignacion_feriado) * 0.01
+#                     print LPH
+#                     new_quincena.LPH = LPH
+#                     total_asignacion = asignacion_laborado + asignacion_feriado + bono1 + new_quincena.bono2
+#                     total_deduccion = SSO + SPF + LPH + new_quincena.prestamos
+#                     new_quincena.total_asignaciones = total_asignacion
+#                     new_quincena.total_deducciones = total_deduccion
+#                     total = (asignacion_laborado + asignacion_feriado + bono1 + new_quincena.bono2) - (SSO + SPF + LPH)
+#                     print total
+#
+#                     new_quincena.total_pagar = total
+#
+#                     new_quincena.save()
+#                 else:
+#                     print "no hay servicios hechos"
+#                     servicio_hechos = 0
+#                     print servicio_hechos
+#                     bono1 = servicio_hechos * new_quincena.bono1.valor
+#                     print bono1
+#                     new_quincena.bono1_pagar = bono1
+#                     sueldos = Empleados.objects.filter(nombre=new_quincena.empleado.nombre)
+#                     print "sueldo base"
+#                     print sueldos
+#                     sueldo = sueldos[0].sueldo_base
+#                     print sueldo
+#                     print "------"
+#                     asignacion_laborado = (sueldo/new_quincena.dias_mes)*new_quincena.dias_laborados
+#                     print asignacion_laborado
+#                     new_quincena.asignaciones_dia_laborado= asignacion_laborado
+#                     #bono1 = servicio_hechos * new_quincena.bono1.valor
+#                     #print bono1
+#                     print new_quincena.bono2
+#                     #new_quincena.bono1_pagar = bono1
+#                     asignacion_feriado = (new_quincena.dias_feriados*(sueldo/new_quincena.dias_mes))*1.5
+#                     print  asignacion_feriado
+#                     new_quincena.asignaciones_dia_feriado = asignacion_feriado
+#                     print "menos"
+#                     SSO = (((sueldo * 12)/52)*new_quincena.cantidad_lunes)*0.4
+#                     print SSO
+#                     new_quincena.SSO = SSO
+#                     SPF = (asignacion_laborado + asignacion_feriado) * 0.005
+#                     print SPF
+#                     new_quincena.SPF =SPF
+#                     LPH = (asignacion_laborado + asignacion_feriado) * 0.01
+#                     print LPH
+#                     total_asignacion = asignacion_laborado + asignacion_feriado + bono1 + new_quincena.bono2
+#                     total_deduccion = SSO + SPF + LPH + new_quincena.prestamos
+#                     new_quincena.total_asignaciones = total_asignacion
+#                     new_quincena.total_deducciones = total_deduccion
+#                     total = (asignacion_laborado + asignacion_feriado + bono1 + new_quincena.bono2) - (SSO + SPF + LPH)
+#                     print total
+#
+#                     new_quincena.total_pagar = total
+#
+#                     new_quincena.save()
+#
+#
+#             html = render_to_string('quincena_pdf.html', {'pagesize':'A4', 'quincena':new_quincena,'fecha_hoy':fecha_hoy},context_instance=RequestContext(request))
+#             return generar_pdf(html)
+#
+#             #return HttpResponseRedirect('/administracion/empleados/quincena')
+#     else:
+#         quincena_form = QuincenasForm()
+#
+#     return render(request, template, locals())
 
 @login_required(login_url='/administracion')
 def quincena_delete(request, pk_id):
@@ -349,7 +383,29 @@ def quincena_print(request, pk_id):
     quincena_instance = get_object_or_404(Quincenas, pk = pk_id)
     fecha_hoy = time.strftime("%d/%m/%y")
     consulta = Quincenas.objects.filter(pk = pk_id)
-    html = render_to_string('quincena_pdf.html', {'pagesize':'A4', 'quincena':consulta[0],'fecha_hoy':fecha_hoy},context_instance=RequestContext(request))
+    print consulta[0].empleado
+    empleados = Servicios_Realizados.objects.filter(empleado=consulta[0].empleado)
+    listaNombre = []
+    listaTipo = []
+    listaPagar = []
+    for dato in empleados:
+        print dato
+        if dato.fecha <= consulta[0].fecha_fin and dato.fecha >= consulta[0].fecha_inicio:
+            print "servicio hecho en quincena"
+            servicio_hechos = len(empleados)
+            print servicio_hechos
+            servicio_nombre = dato.servicio
+            servicio_tipo = dato.tipo_servicio.tipo
+            servicio_pagar = dato.tipo_servicio.valor
+            print servicio_nombre
+            print servicio_tipo
+            print "a pagar"
+            print servicio_pagar
+            listaNombre.append(servicio_nombre)
+            listaTipo.append(servicio_tipo)
+            listaPagar.append(servicio_pagar)
+
+    html = render_to_string('quincena_pdf.html', {'pagesize':'A4', 'quincena':consulta[0],'fecha_hoy':fecha_hoy,'nombres':listaNombre,'tipos':listaTipo,'pagos':listaPagar},context_instance=RequestContext(request))
     return generar_pdf(html)
 
 
@@ -447,8 +503,12 @@ def serv_empl(request):
             empleado_ingresado = get_object_or_404(Empleados, cedula = empleado)
             print empleado_ingresado
 
-            servicios = Servicios_Realizados.objects.filter(empleado = empleado_ingresado)
+            servicios = Servicios_Realizados.objects.filter(empleado = empleado_ingresado).order_by("fecha")
             print servicios
+            listaNombre = []
+            listaVehiculo = []
+            listaFecha = []
+            listaPagar = []
             for servicio in servicios:
                 fecha = servicio.fecha
                 print fecha
@@ -467,21 +527,28 @@ def serv_empl(request):
                 print  ano_inicio3
                 ano_inicio_I3 = int(ano_inicio3)
 
-                if ano_inicio3 >= ano_inicio and ano_inicio3 <=ano_inicio2:
+                if ano_inicio3 >= ano_inicio or ano_inicio3 <=ano_inicio2:
                     print "estamos dentro del rango de ano"
                     if mes_inicio3 >= mes_inicio and mes_inicio3 <=mes_inicio2:
                         print "estamos en el rago de meses"
                         if dia_inicio3 >= dia_inicio and dia_inicio3 <=dia_inicio2:
                             print "estamos en el rago de dias"
-                            html = render_to_string('serv_empl_pdf.html', {'pagesize':'A4', 'empleado':empleado_ingresado, 'servicios':servicios,'fecha_hoy':fecha_hoy ,'fecha_inicio':fecha_inicio,'fecha_fin':fecha_fin },context_instance=RequestContext(request))
-                            return generar_pdf(html)
+                            servicio_nombre = servicio.servicio
+                            servicio_vehiculo = servicio.vehiculo_cliente
+                            servicio_fecha = servicio.fecha
+                            servicio_pagar = servicio.tipo_servicio.valor
+                            listaNombre.append(servicio_nombre)
+                            listaVehiculo.append(servicio_vehiculo)
+                            listaFecha.append(servicio_fecha)
+                            listaPagar.append(servicio_pagar)
                         else:
-                            print "fuera de rango"
+                            print "fuera de rango dia"
                     else:
-                        print "fuera de rango"
+                        print "fuera de rango mes"
                 else:
-                    print "fuera de rango"
-
+                    print "fuera de rango ano"
+            html = render_to_string('serv_empl_pdf.html', {'pagesize':'A4', 'empleado':empleado_ingresado, 'servicios':servicios,'fecha_hoy':fecha_hoy ,'fecha_inicio':fecha_inicio,'fecha_fin':fecha_fin,'nombres':listaNombre,'vehiculos':listaVehiculo,'fechas':listaFecha,'pagos':listaPagar },context_instance=RequestContext(request))
+            return generar_pdf(html)
 
 
     return render(request, template, locals())

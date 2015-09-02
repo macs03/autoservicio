@@ -69,27 +69,35 @@
                 <th>Servicio</th>
 	     			<th>Vehiculo</th>
 	     			<th>Fecha</th>
-                    <th>Valor</th>
+                    <th>Pagar</th>
             </tr>
             </thead>
-            {% for servicio in servicios %}
+
 	    	<tbody>
                 <tr>
                     <td>
-                        {{servicio.servicio}}
+                        {% for name in nombres %}
+                            {{name}} <br/>
+                        {% endfor %}
                     </td>
                     <td>
-                        {{servicio.vehiculo_cliente}}
+                        {% for vehiculo in vehiculos %}
+                            {{vehiculo}} <br/>
+                        {% endfor %}
                     </td>
                     <td>
-                        {{servicio.fecha}}
+                        {% for fecha in fechas %}
+                            {{fecha}} <br/>
+                        {% endfor %}
                     </td>
                     <td>
-                        {{servicio.costo}}
+                        {% for pago in pagos %}
+                            {{pago}} <br/>
+                        {% endfor %}
                     </td>
                 </tr>
 	    	</tbody>
-                {% endfor %}
+
         </table>
 	    
 	    <br>

@@ -82,7 +82,7 @@ def servicios_delete(request, pk_id):
 @login_required(login_url='/administracion')
 def servicios_realizados(request):
 	template = "servicios_realizados.html"
-	servicios_realizados = Servicios_Realizados.objects.all()
+	servicios_realizados = Servicios_Realizados.objects.all().order_by('-fecha')
 	value_boton = "Agregar"
 	if request.method=='POST':
 		servicio_realizado_form = Servicios_RealizadosForm(request.POST)

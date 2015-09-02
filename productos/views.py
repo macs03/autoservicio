@@ -8,7 +8,7 @@ import time
 from django.shortcuts import render, get_object_or_404
 from .models import Productos, ProductosForm, Factura, FacturasForm, Egresos, EgresosForm
 from servicios.models import Servicios_Realizados, Servicios
-from vehiculos.models import Vehiculo_Clientes
+from vehiculos.models import Clientes
 from empleados.models import Bancos
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
@@ -76,10 +76,10 @@ def facturas(request):
     productos = Productos.objects.filter(cantidad__gt = 0)
 
 
-    clientes_vehiculos = Vehiculo_Clientes.objects.all()
+    clientes_vehiculos = Clientes.objects.all()
     if request.method=='POST':
         print request.POST
-        cliente_vehiculo = get_object_or_404(Vehiculo_Clientes, pk= request.POST['cliente'])
+        cliente_vehiculo = get_object_or_404(Clientes, pk= request.POST['cliente'])
         fecha = request.POST['fecha']
         total = request.POST['total']
         banco_seleccionado = request.POST['bancos']
@@ -110,9 +110,13 @@ def facturas(request):
         listaIvaServicio = []
         print dict(request.POST)["productos"]
         for servicio_pk in dict(request.POST)["servicios"]:
-            servicio = get_object_or_404(Servicios_Realizados, pk=servicio_pk)
-            factura.servicios.add(servicio)
-            listaIvaServicio.append(servicio.costo * 0.12)
+            #servicio = get_object_or_404(Servicios_Realizados, pk=servicio_pk)
+            servicio = Servicios_Realizados.objects.filter(pk=servicio_pk)
+            print "-----"
+            print servicio
+            if servicio:
+                factura.servicios.add(servicio[0])
+                listaIvaServicio.append(servicio[0].costo.valor * 0.12)
 
         listaCantidad = []
         listaImporte = []
@@ -192,18 +196,27 @@ def facturas_print(request, pk_id):
 @csrf_exempt
 def get_servicios(request):
     id = request.POST.get('id')
-    vehiculo_cliente = get_object_or_404(Vehiculo_Clientes, pk=id)
+    print id
+    vehiculo_cliente = get_object_or_404(Clientes, pk=id)
+    print vehiculo_cliente
     servicios = Servicios_Realizados.objects.filter(vehiculo_cliente=vehiculo_cliente)
+    print servicios
     response_data = []
     for servicio in servicios:
         response_serv = {}
         response_serv['id'] = servicio.pk
+        print response_serv['id']
         response_serv['servicio'] = servicio.servicio.nombre
+        print response_serv['servicio']
         response_serv['vehiculo_cliente'] = "%s - %s" % (
-            servicio.vehiculo_cliente.cliente, servicio.vehiculo_cliente.vehiculo)
+             servicio.vehiculo_cliente.nombre, servicio.vehiculo_cliente.placa)
+        print response_serv['vehiculo_cliente']
         response_serv['fecha'] = servicio.fecha.__str__()
-        response_serv['costo'] = servicio.costo
+        print response_serv['fecha']
+        response_serv['costo'] = servicio.costo.valor
+        print response_serv['costo']
         response_serv['empleado'] = servicio.empleado.nombre
+        print response_serv['empleado']
         response_data.append(response_serv)
 
     # print json.dumps(response_data)
@@ -224,7 +237,7 @@ def generar_pdf(html):
 def egresos(request):
     print "vista egresos"
     template = "egresos.html"
-    egresos = Egresos.objects.all()
+    egresos = Egresos.objects.all().order_by('-fecha')
     fecha_hoy = time.strftime("%d/%m/%y")
     value_boton = "Generar"
     if request.method == 'POST':

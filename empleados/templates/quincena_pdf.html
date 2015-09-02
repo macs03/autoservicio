@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Quincena Número: {{quincena.pk}}</title>
+    <title>Semana Número: {{quincena.pk}}</title>
     <style>
 		.line{
 			background: black;
@@ -69,19 +69,13 @@
 	     	<thead>
 	     		<tr>
 	     			<th></th>
-	     			<th></th>
 	     		</tr>
 	     	</thead>
 	    	<tbody>
 	    		<tr>
 	    			<td>
-	    				<div class="semana">
-					    	<span><strong>Semana nro:</strong> {{quincena.numero_semana_1}}-{{quincena.numero_semana_2}}</span>
-					    </div>
-	    			</td>
-	    			<td>
 	    				<div class="quincena">
-					    	<span><strong>Quincena nro: </strong>{{quincena.numero_quincena}}</span>
+					    	<span><strong>Semana nro: </strong>{{quincena.numero_quincena}}</span>
 					    </div>
 	    			</td>
 	    		</tr>
@@ -90,7 +84,7 @@
 	    
 	    <br>
 	    <div class="titulo_nomina">
-	    	<span><strong>Nomina Quincenal Correspondiente:</strong></span>
+	    	<span><strong>Nomina Semanal Correspondiente:</strong></span>
 	    </div>
 	
 		<table style="  width: 400px;  text-align: center;">
@@ -154,30 +148,21 @@
 					    	<span><strong>CEDULA: {{quincena.empleado.cedula}}</strong></span>
 					    </div>
 	    			</td>
-	    			<td>
-	    				<div class="sueldo">
-					    	<span><strong>SUELDO MENSUAL: {{quincena.empleado.sueldo_base}}</strong></span>
-					    </div>
-	    			</td>
 	    		</tr>
 	    	</tbody>
 	    </table>
 	    
 	    <br>
 	    
-	    <div class="dias">
-	    	<span><strong>DIAS DEL MES: {{quincena.dias_mes}}</strong></span>
-	    </div>
+
 	    <br>
 	    <br>
 
 		<table style="  width: 100%;  text-align: center;">
 			<thead style="background: rgb(35, 133, 161) none repeat scroll 0% 0%;">
 		        <tr >
-		            <th ><strong>CONCEPTO</strong></th>
-		            <th ><strong></strong></th>
-		            <th ><strong>ASIGNACIONES</strong></th>
-		            <th ><strong>DEDUCCIONES</strong></th>
+		            <th ><strong>SERVICIO</strong></th>
+		            <th ><strong>TIPO</strong></th>
 		            <th ><strong>TOTAL</strong></th>
 		            <th ><strong>HUELLA DACTILAR</strong></th>
 		        </tr>
@@ -187,53 +172,22 @@
 
 		        <tr>
 		           	<td>
-		           		DIAS LABORADOS: <br>
-		           		Bonifiacion Especial 1: <br>
-		           		Bonficacion Especial 2: <br>
-		           		Dias de Descanso: <br>
-		           		Dias Feriados: <br>
-		           		<div class="line"></div>
-		           		S.S.O: <br>
-		           		S.P.F: <br>
-		           		L.P.H: <br>
-		           		Dias no Laborados: <br>
-		           		Pestamos Personales: <br>
+                        {%for name in nombres%}
+                            {{name}} <br/>
+                        {%endfor%}
 		           	</td>
 		            <td>
-		            	{{ quincena.dias_laborados }} <br>
-		            	{{ quincena.bono1.valor }}<br>
-		            	{{ quincena.bono2 }}<br>
-		            	{{ quincena.dias_descanso }}<br>
-		            	{{ quincena.dias_feriados }} <br>
-		            	4% <br>
-		            	0,50% <br>
-		            	1%<br>
-		            	{{ quincena.dias_no_laborados }} <br>
-		            	{{ quincena.prestamos }} <br>
+                        {%for tipo in tipos%}
+                            {{tipo}} <br/>
+                        {%endfor%}
 		            </td>
 		            <td>
-		            	{{ quincena.asignaciones_dia_laborado }} <br>
-		            	{{ quincena.bono1_pagar }} <br>
-		            	{{ quincena.bono2 }} <br>
-		            	-- <br>
-		            	{{ quincena.asignaciones_dia_feriado }} <br>
-		            	-- <br>
-		            	-- <br>
-		            	-- <br>
-		            	-- <br>
-		            	-- <br>
+                        {%for pago in pagos%}
+                            {{pago}} <br/>
+                        {%endfor%}
 		            </td>
 		            <td>
-		            	-- <br>
-		            	-- <br>
-		            	-- <br>
-		            	-- <br>
-		            	-- <br>
-		            	{{ quincena.SSO }}  <br>
-		            	{{ quincena.SPF }}<br>
-		            	{{ quincena.LPH }} <br>
-		            	-- <br>
-		            	{{ quincena.prestamos }}<br>
+
 		            </td>
 		        </tr>
 		           
@@ -242,15 +196,17 @@
 		        <tr>
 		            <th ><strong>TOTALES</strong></th>
 		            <th ><strong></strong></th>
-		            <th ><strong>{{ quincena.total_asignaciones }}</strong></th>
-		            <th ><strong>{{ quincena.total_deducciones }}</strong></th>
-		            <th ><strong>{{ quincena.total_pagar }}</strong></th>
+		            <th ><strong>{{quincena.total_pagar}}</strong></th>
 		            <th ><strong>FIRMA</strong></th>
 		        </tr>
 		    </thead>
 
 
 		</table>
+        <br/>
+        <br/>
+        <br/>
+        <span><strong>Prestamos: </strong>{{quincena.prestamos}}</span>
 	</div>
 
 </body>
