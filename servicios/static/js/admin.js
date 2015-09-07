@@ -25,7 +25,7 @@ $(function(){
 
 	function getServicios(id){
 		$.ajax({
-			url: 'http://localhost:8000/administracion/getservicios/',
+			url: '/administracion/getservicios/',
 			type: 'post',
 			data: {
 				"id": id
