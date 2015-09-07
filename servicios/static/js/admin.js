@@ -54,9 +54,12 @@ $(function(){
 		});
 	}
 
-	$('#selectCliente').click(function(){
-		var id = $('#selectCliente').val()
-		getServicios(id);
+	$('#selectCliente').change(function(){
+		var id = $('#selectCliente').val();
+        console.log(id);
+        if(id != "none"){
+		    getServicios(id);
+        }
 	});
 	
    var totalServ = 0;

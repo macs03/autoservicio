@@ -68,7 +68,7 @@ def nomina(request):
         if(nomina_form.is_valid()):
             print request.GET
             print "-------------------quincena"
-            numero_quincena = request.GET['numero_quincena']
+            numero_quincena = request.GET['numero_semana']
             print numero_quincena
             if not numero_quincena:
                 print "quincena no valida"
@@ -78,7 +78,7 @@ def nomina(request):
                 print numero_quincena
                 print type(numero_quincena)
                 numero = int(numero_quincena)
-                quincena_valida = Quincenas.objects.filter(numero_quincena = numero).order_by('pk')
+                quincena_valida = Quincenas.objects.filter(numero_semana = numero).order_by('pk')
                 #quincena_valida = get_object_or_404(Quincenas, numero_quincena = numero).order_by('pk')
                 if quincena_valida:
                     print quincena_valida
@@ -100,7 +100,7 @@ def nomina(request):
                     for dato in quincena_valida:
                         print dato.empleado.nombre
                         print dato.empleado.apellido
-                        print dato.numero_quincena
+                        print dato.numero_semana
                         print dato.total_pagar
                         acum_nomina = acum_nomina + dato.total_pagar
 
